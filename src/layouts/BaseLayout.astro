@@ -88,13 +88,23 @@ const { title="default title" } = Astro.props;
         font-family: Manrope, sans-serif;
     }
 
-    a {
-        color: var(--highlight);
+    main {
+        max-width: 60%;
+        margin: auto;
     }
 
-    main {
-        width: 60%;
-        margin: auto;
+    hr {
+        border: 1px solid var(--primary);
+        border-radius: 2px;
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--primary);
     }
 
     #header {

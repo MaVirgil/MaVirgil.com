@@ -1,10 +1,6 @@
 ---
-
+import toggleIcon from '../assets/darkmode-toggle-icon.svg?raw';
 ---
-
-<button id="theme-toggle">
-    <p>switch theme</p>
-</button>
 
 <script>
     const toggleClick = () => {
@@ -20,3 +16,19 @@
 
     document.getElementById('theme-toggle')?.addEventListener("click", toggleClick());
 </script>
+
+<button id="theme-toggle" aria-label="Toggle Dark-mode">
+    <span id="icon" set:html={toggleIcon}></span>
+</button>
+
+<style>
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .icon :global(svg){
+        fill: var(--text);
+    }
+</style>
