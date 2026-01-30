@@ -10,6 +10,28 @@ const { title="default title" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <script is:inline>
+        const theme = (() => {
+            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                console.log('return theme from localStorage');
+                return localStorage.getItem('theme');
+            }
+            if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+                console.log('prefers light: true -- returning "light"');
+                return 'light';
+            }
+            console.log('prefers light: false -- returning "dark"');
+            return 'dark';
+        })();
+
+        if (theme === 'light') {
+            document.documentElement.classList.add('light');
+        } else {
+            document.documentElement.classList.remove('light');
+        }
+    </script>
+
 </head>
 <body>
     <Header></Header>
@@ -19,10 +41,9 @@ const { title="default title" } = Astro.props;
 
 <style is:global>
 
-
     /* dark-mode colors */
     :root {
-        --bg-dark: oklch(0.1 0.035 69);
+        --bg-dark: oklch(0.15 0.02 69);
         --bg-light: oklch(0.15 0.035 69);
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
@@ -34,18 +55,16 @@ const { title="default title" } = Astro.props;
     }
 
     /* light-mode colors */
-    @media (prefers-color-scheme: light) {
-        :root {
-            --bg-dark: oklch(0.92 0.035 69);
-            --bg-light: oklch(0.96 0.035 69);
-            --text: oklch(0.18 0.07 69);
-            --text-muted: oklch(0.4 0.07 69);
-            --highlight: oklch(1 0.07 69);
-            --border: oklch(0.6 0.07 69);
-            --border-muted: oklch(0.7 0.07 69);
-            --primary: oklch(0.4 0.1 69);
-            --secondary: oklch(0.4 0.1 249);
-        }
+    :root.light {
+        --bg-dark: oklch(0.92 0.035 69);
+        --bg-light: oklch(0.96 0.035 69);
+        --text: oklch(0.18 0.07 69);
+        --text-muted: oklch(0.4 0.07 69);
+        --highlight: oklch(1 0.07 69);
+        --border: oklch(0.6 0.07 69);
+        --border-muted: oklch(0.7 0.07 69);
+        --primary: oklch(0.4 0.1 69);
+        --secondary: oklch(0.4 0.1 249);
     }
 
     body {
