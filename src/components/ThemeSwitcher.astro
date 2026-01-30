@@ -1,5 +1,5 @@
 ---
-import toggleIcon from '../assets/darkmode-toggle-icon.svg?raw';
+import { Icon } from 'astro-icon/components'
 ---
 
 <script>
@@ -18,17 +18,34 @@ import toggleIcon from '../assets/darkmode-toggle-icon.svg?raw';
 </script>
 
 <button id="theme-toggle" aria-label="Toggle Dark-mode">
-    <span id="icon" set:html={toggleIcon}></span>
+    <Icon name="darkmode-toggle-icon" />
 </button>
 
 <style>
     button {
+        padding: 0;
         background: none;
         border: none;
         cursor: pointer;
     }
 
-    .icon :global(svg){
-        fill: var(--text);
+    [data-icon="darkmode-toggle-icon"] {
+        font-size: 3em;
+        color: var(--text);
     }
+
+    [data-icon="darkmode-toggle-icon"]:hover {
+        color: var(--primary);
+        animation: icon-anim 150ms 1 forwards;
+    }
+
+    @keyframes icon-anim {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.1);
+        }
+    }
+
 </style>

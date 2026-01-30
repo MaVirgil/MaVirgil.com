@@ -10,8 +10,26 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
     <div id="header-menu">
         <a href="#">Posts</a>
         <a href="#">Projects</a>
-        <a href="#">Resume</a>
         <ThemeSwitcher></ThemeSwitcher>
     </div>
 </div>
 <hr>
+
+<style>
+    #header {
+        padding-top: 1.5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    a {
+        padding-right: 2em;
+        font-size: large;
+    }
+
+    #header-menu {
+        display: flex;
+        align-items: center;
+    }
+</style>
