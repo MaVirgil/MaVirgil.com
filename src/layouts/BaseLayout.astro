@@ -34,12 +34,23 @@ const { title="default title" } = Astro.props;
 
 </head>
 <body>
+<main>
     <Header></Header>
     <slot />
+</main>
 </body>
 </html>
 
 <style is:global>
+
+    @font-face {
+        font-family: 'Manrope';
+        src: url("../../public/manrope.woff2") format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+
+    }
 
     /* dark-mode colors */
     :root {
@@ -67,8 +78,35 @@ const { title="default title" } = Astro.props;
         --secondary: oklch(0.4 0.1 249);
     }
 
+    html,
     body {
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
         background-color: var(--bg-dark);
         color: var(--text);
+        font-family: Manrope, sans-serif;
     }
+
+    a {
+        color: var(--highlight);
+    }
+
+    main {
+        width: 60%;
+        margin: auto;
+    }
+
+    #header {
+        padding-top: 1.5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #header a {
+        padding-right: 25px;
+        font-size: large;
+    }
+
 </style>
