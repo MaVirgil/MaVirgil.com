@@ -1,0 +1,30 @@
+---
+const { description } = Astro.props;
+---
+
+<div id="container">
+    <h2 set:text={description} />
+    <div id="icons">
+        <slot />
+    </div>
+</div>
+
+<style>
+
+    h3 {
+        margin: 0;
+        font-weight: normal;
+    }
+
+    #container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        align-items: center;
+    }
+
+    #icons {
+        display: flex;
+        gap: 20px;
+    }
+</style>
