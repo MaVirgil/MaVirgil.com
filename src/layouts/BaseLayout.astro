@@ -54,28 +54,28 @@ const { title="default title" } = Astro.props;
 
     /* dark-mode colors */
     :root {
-        --bg-dark: oklch(0.1588 0.0126 71);
+        --bg-dark: oklch(0.19 0.005 71);
         --bg-light: oklch(0.15 0.035 69);
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
         --highlight: oklch(0.5 0.07 69);
         --border: oklch(0.4 0.07 69);
         --border-muted: oklch(0.3 0.07 69);
-        --primary: oklch(0.76 0.1 69);
+        --primary: oklch(0.681 0.1586 47.54);
         --secondary: oklch(0.76 0.1 249);
     }
 
     /* light-mode colors */
     :root.light {
-        --bg-dark: oklch(0.92 0.035 69);
+        --bg-dark: oklch(.8 0.06 69);
         --bg-light: oklch(0.96 0.035 69);
-        --text: oklch(0.18 0.07 69);
+        --text: oklch(0.1825 0.0214 36.85);
         --text-muted: oklch(0.4 0.07 69);
         --highlight: oklch(1 0.07 69);
         --border: oklch(0.6 0.07 69);
         --border-muted: oklch(0.7 0.07 69);
-        --primary: oklch(0.4 0.1 69);
-        --secondary: oklch(0.4 0.1 249);
+        --primary: oklch(0.5623 0.1147 52.88);
+        --secondary: oklch(0.6 0.15 249);
     }
 
     html,
@@ -106,6 +106,14 @@ const { title="default title" } = Astro.props;
     }
 
     a:hover {
+        color: var(--primary);
+    }
+
+    li::marker {
+        color: var(--primary);
+    }
+
+    em {
         color: var(--primary);
     }
 </style>
