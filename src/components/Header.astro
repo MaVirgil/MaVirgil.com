@@ -4,13 +4,11 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <div id="header">
-    <section class="hero">
-        <h1>Magnus Sørensen</h1>
-    </section>
+    <h2>Magnus Sørensen</h2>
     <div id="header-menu">
         <a href="#">Posts</a>
         <a href="#">Projects</a>
-        <ThemeSwitcher></ThemeSwitcher>
+        <ThemeSwitcher />
     </div>
 </div>
 <hr>
@@ -24,12 +22,12 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
     }
 
     a {
-        padding-right: 2em;
         font-size: large;
     }
 
     #header-menu {
         display: flex;
         align-items: center;
+        gap: 2em;
     }
 </style>

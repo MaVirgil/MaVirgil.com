@@ -17,10 +17,12 @@ const { title="default title" } = Astro.props;
                 console.log('return theme from localStorage');
                 return localStorage.getItem('theme');
             }
+
             if (window.matchMedia("(prefers-color-scheme: light)").matches) {
                 console.log('prefers light: true -- returning "light"');
                 return 'light';
             }
+
             console.log('prefers light: false -- returning "dark"');
             return 'dark';
         })();
@@ -35,21 +37,19 @@ const { title="default title" } = Astro.props;
 </head>
 <body>
 <main>
-    <Header></Header>
+    <Header />
     <slot />
 </main>
 </body>
 </html>
 
 <style is:global>
-
     @font-face {
         font-family: 'Manrope';
         src: url("/manrope.woff2") format('woff2');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
-
     }
 
     /* dark-mode colors */
@@ -89,7 +89,7 @@ const { title="default title" } = Astro.props;
     }
 
     main {
-        max-width: 60%;
+        max-width: 50%;
         margin: auto;
     }
 
@@ -106,5 +106,4 @@ const { title="default title" } = Astro.props;
     a:hover {
         color: var(--primary);
     }
-
 </style>

@@ -1,9 +1,49 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
+import IconContainer from "../components/IconContainer.astro"
+import { Content as BioContent} from '../components/content/bio.md'
+import { Icon } from 'astro-icon/components'
 ---
 
 <BaseLayout title="Magnus Sørensen">
 	<div id="hero">
-		<h3>SCKRRORORMSOMOMOMO</h3>
+		<BioContent />
+		<IconContainer description="Socials:">
+			<a href="https://github.com" target="_blank" class="icon-container-link">
+				<Icon name="github" />
+			</a>
+
+			<a href="https://bsky.app" target="_blank" class="icon-container-link">
+				<Icon name="bluesky" />
+			</a>
+
+			<a href="https://www.linkedin.com/in/magnus-virgil-s%C3%B8rensen-0167872b5/" target="_blank" class="icon-container-link">
+				<Icon name="linkedin" />
+			</a>
+		</IconContainer>
 	</div>
 </BaseLayout>
+
+<style>
+	.icon-container-link {
+		width: 24px;
+		height: 24px;
+	}
+
+	[data-icon] {
+		font-size: 1.5em;
+	}
+
+	[data-icon]:hover {
+		animation: icon-anim 50ms 1 forwards;
+	}
+
+	@keyframes icon-anim {
+		0% {
+			transform: scale(1);
+		}
+		100% {
+			transform: scale(1.1);
+		}
+	}
+</style>
