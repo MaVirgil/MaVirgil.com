@@ -8,23 +8,29 @@ import { Icon } from 'astro-icon/components'
 <BaseLayout title="Magnus Sørensen">
 	<div id="hero">
 		<BioContent />
-		<IconContainer description="Socials:">
-			<a href="https://github.com/MaVirgil" target="_blank" class="icon-container-link">
-				<Icon name="github" />
-			</a>
+		<div id="contact">
+			<h2>Get in touch:</h2>
+			<div id="contact-info">
+				<IconContainer gap="20px">
+					<a href="https://github.com/MaVirgil" target="_blank" class="icon-container-link">
+						<Icon name="github" />
+					</a>
 
-			<a href="https://www.linkedin.com/in/magnus-virgil-s%C3%B8rensen-0167872b5/" target="_blank" class="icon-container-link">
-				<Icon name="linkedin" />
-			</a>
+					<a href="https://www.linkedin.com/in/magnus-virgil-s%C3%B8rensen-0167872b5/" target="_blank" class="icon-container-link">
+						<Icon name="linkedin" />
+					</a>
 
-			<a href="https://bsky.app/profile/magnus-virgil.bsky.social" target="_blank" class="icon-container-link">
-				<Icon name="bluesky" />
-			</a>
+					<a href="https://bsky.app/profile/magnus-virgil.bsky.social" target="_blank" class="icon-container-link">
+						<Icon name="bluesky" />
+					</a>
 
-			<a href="https://www.instagram.com/magnusvirgil/" target="_blank" class="icon-container-link">
-				<Icon name="instagram" />
-			</a>
-		</IconContainer>
+					<a href="https://www.instagram.com/magnusvirgil/" target="_blank" class="icon-container-link">
+						<Icon name="instagram" />
+					</a>
+				</IconContainer>
+				<a href="mailto:magnusvirgil@hotmail.com">magnusvirgil@hotmail.com</a>
+			</div>
+		</div>
 	</div>
 </BaseLayout>
 
@@ -39,6 +45,7 @@ import { Icon } from 'astro-icon/components'
 	}
 
 	[data-icon]:hover {
+		color: var(--primary);
 		animation: icon-anim 50ms 1 forwards;
 	}
 
@@ -50,4 +57,20 @@ import { Icon } from 'astro-icon/components'
 			transform: scale(1.1);
 		}
 	}
+
+	#contact h2 {
+		font-weight: normal;
+		margin-bottom: 0.5em;
+	}
+
+	#contact-info {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 0.2em;
+	}
+
+	#contact-info a {
+		display: inline;
+	}
+
 </style>
