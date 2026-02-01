@@ -13,11 +13,83 @@ export async function getStaticPaths() {
 //get content for rendering site
 const { project } = Astro.props;
 const { Content } = await render(project)
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+//other imports
+import { Image } from "astro:assets"
+import {Icon} from "astro-icon/components";
+import { formatDate} from "../../scripts/utils";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<ProjectLayout title={project.data.title}>
-    <Content />
-</ProjectLayout>
+<BaseLayout title={`Project — ${project.data.title}`} maxWidth="60em">
+    <Header />
+    <Image src={project.data.cover} alt={project.data.coverAlt}/>
+    <div class="project-header">
+        <h1 id="project-title">{project.data.title}</h1>
+        <div class="tech-list">
+            <p>Technologies used: </p>
+            {project.data.technologies.map(technology => (
+                <p class="tech-item">{technology}</p>
+            ))}
+        </div>
+        <p id="date">{formatDate(project.data.pubDate)}</p>
+    </div>
+    <hr id="ruler">
+    <div class="content">
+        <Content />
+    </div>
+</BaseLayout>
+
+<style>
+
+    [data-icon="back-icon"] {
+        color: var(--text);
+        font-size: 2em;
+    }
+
+    [data-icon="back-icon"]:hover {
+        color: var(--primary);
+    }
+
+    img {
+        margin-top: 3em;
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        border-style: solid;
+        border-color: var(--primary);
+        border-width: 2px;
+    }
+
+    .project-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #project-title {
+        margin-bottom: 0;
+    }
+
+    .tech-list {
+        display: flex;
+        gap: 0.5em;
+    }
+
+    .tech-list p {
+        margin: .5em 0 0 0;
+    }
+
+    .tech-item {
+        color: var(--secondary);
+    }
+
+    #date {
+        margin: 0;
+        color: var(--text-muted);
+    }
+
+
+</style>
 
 

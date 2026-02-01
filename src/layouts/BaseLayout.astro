@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 const { title="default title" } = Astro.props;
+const { maxWidth="50em"} = Astro.props;
 ---
 
 <html lang="en">
@@ -42,7 +43,7 @@ const { title="default title" } = Astro.props;
 </body>
 </html>
 
-<style is:global>
+<style is:global define:vars={{maxWidth}}>
     @font-face {
         font-family: 'Manrope';
         src: url("/manrope.woff2") format('woff2');
@@ -91,8 +92,8 @@ const { title="default title" } = Astro.props;
 
     main {
         margin: auto;
-        padding: 0 2em;
-        max-width: 50em;
+        padding: 0 2em 6em;
+        max-width: var(--maxWidth);
     }
 
     hr {

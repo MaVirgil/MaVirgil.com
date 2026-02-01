@@ -2,9 +2,9 @@
 import BaseLayout from "./BaseLayout.astro"
 import Header from "../components/Header.astro";
 import { Icon } from 'astro-icon/components'
-const title = Astro.props
+const { title="Untitled Project" } = Astro.props
 ---
-<BaseLayout title={title ?? "Untitled Project"}>
+<BaseLayout title={title}>
     <Header />
     <a href="/projects">
         <Icon name="back-icon"/>
