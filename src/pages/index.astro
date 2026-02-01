@@ -3,9 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 import IconContainer from "../components/IconContainer.astro"
 import { Content as BioContent} from '../components/content/bio.md'
 import { Icon } from 'astro-icon/components'
+import Header from "../components/Header.astro";
 ---
 
 <BaseLayout title="Magnus Sørensen">
+	<Header />
 	<div id="hero">
 		<BioContent />
 		<div id="contact">

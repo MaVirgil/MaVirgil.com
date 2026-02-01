@@ -1,0 +1,28 @@
+---
+import BaseLayout from "./BaseLayout.astro"
+import Header from "../components/Header.astro";
+import { Icon } from 'astro-icon/components'
+const { title="Untitled Project" } = Astro.props
+---
+<BaseLayout title={title}>
+    <Header />
+    <a href="/projects">
+        <Icon name="back-icon"/>
+    </a>
+    <div class="project-header">
+    </div>
+    <div class="content">
+        <slot />
+    </div>
+</BaseLayout>
+
+<style>
+    [data-icon="back-icon"] {
+        color: var(--text);
+        font-size: 2em;
+    }
+
+    [data-icon="back-icon"]:hover {
+        color: var(--primary);
+    }
+</style>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+    <div id="error-container">
+        <slot />
+    </div>
+    <a href="/">Back to frontpage</a>
+</BaseLayout>
+
+<style>
+    #error-container {
+        padding-top: 5em;
+        padding-bottom: 1.5em;
+    }
+</style>
