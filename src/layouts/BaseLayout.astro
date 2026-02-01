@@ -103,7 +103,10 @@ const { title="default title" } = Astro.props;
 
     a {
         color: var(--text);
-        text-decoration: none;
+        text-decoration-color: var(--primary);
+        text-decoration-thickness: 2px;
+        text-decoration-skip-ink: none;
+        text-underline-offset: 0.3em;
     }
 
     a:hover {

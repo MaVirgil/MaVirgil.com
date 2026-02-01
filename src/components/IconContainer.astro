@@ -1,30 +1,20 @@
 ---
-const { description } = Astro.props;
+const { gap } = Astro.props;
 ---
 
-<div id="container">
-    <h2 set:text={description} />
-    <div id="icons">
-        <slot />
-    </div>
+<div id="icons">
+    <slot />
 </div>
 
-<style>
-
-    h2 {
-        margin: 0;
-        font-weight: normal;
-    }
-
+<style define:vars={{gap}}>
     #container {
         display: flex;
         justify-content: flex-start;
-        gap: 20px;
         align-items: center;
     }
 
     #icons {
         display: flex;
-        gap: 20px;
+        gap: var(--gap);
     }
 </style>
