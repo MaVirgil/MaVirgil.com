@@ -3,14 +3,14 @@
 import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
-<div id="header">
-    <h2>Magnus Sørensen</h2>
+<header id="header">
+    <a href="/" id="logo">Magnus Sørensen</a>
     <div id="header-menu">
         <a href="#">Posts</a>
-        <a href="#">Projects</a>
+        <a href="/projects">Projects</a>
         <ThemeSwitcher />
     </div>
-</div>
+</header>
 <hr>
 
 <style>
@@ -19,6 +19,15 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    #logo {
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+
+    #logo:hover {
+        color: var(--text);
     }
 
     a {

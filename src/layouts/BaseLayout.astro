@@ -37,7 +37,6 @@ const { title="default title" } = Astro.props;
 </head>
 <body>
 <main>
-    <Header />
     <slot />
 </main>
 </body>
@@ -102,6 +101,7 @@ const { title="default title" } = Astro.props;
     }
 
     a {
+        cursor: pointer;
         color: var(--text);
         text-decoration-color: var(--primary);
         text-decoration-thickness: 2px;
