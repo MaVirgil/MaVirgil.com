@@ -1,19 +1,99 @@
 ---
-import {type CollectionEntry, getCollection} from "astro:content";
+import { getCollection } from "astro:content";
+import { formatDate} from "../../scripts/utils";
+import { Image } from "astro:assets"
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 
 const projects = (await getCollection('projects')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+).filter(project => project.data.finished === true);
 ---
 
 <BaseLayout title="Projects">
     <Header></Header>
-    <h1>Project list goes here</h1>
-    <ul>
+    <div class="projects-container">
+        <h1 id="projects-header">Projects:</h1>
         {projects.map(project => (
-           <li><a href={`/projects/${project.id}`}>{project.data.title}</a></li>
+            <a href={`/projects/${project.id}`} class="project-card-anchor-container">
+                <div class="project-card">
+                    <Image src={project.data.cover} alt={project.data.coverAlt} />
+                    <div class="project-data">
+                        <h3 class="project-title">{project.data.title}</h3>
+                        <p class="date">{formatDate(project.data.pubDate)}</p>
+                        <p class="project-description">{project.data.description}</p>
+                    </div>
+                </div>
+            </a>
         ))}
-    </ul>
+    </div>
 </BaseLayout>
+
+<style>
+    #projects-header {
+        margin: 0;
+    }
+
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        box-sizing: content-box;
+        align-items: center;
+        gap: var(--gap-medium);
+        margin: var(--gap-small) var(--edge-padding) 0;
+    }
+
+    .project-card-anchor-container {
+        color: var(--text);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .project-card {
+        max-width: 40em;
+        padding: 1.3em;
+        background-color: var(--bg-light);
+        border-radius: var(--rounding);
+    }
+
+    .project-card:hover {
+        box-shadow-color: var(--primary);
+        animation: anim 150ms 1 forwards;
+    }
+
+    .project-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        border-style: solid var(--primary);
+    }
+
+    .project-data {
+        margin: 0.5em;
+    }
+
+    .project-title {
+        margin-top: 0.2em;
+        margin-bottom: 0;
+    }
+
+    .date {
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .project-description {
+        margin-top: var(--gap-tiny);
+    }
+
+    @keyframes anim {
+        0% {
+            transform: scale(1);
+            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
+        }
+        100% {
+            transform: scale(1.02);
+            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
+        }
+    }
+</style>

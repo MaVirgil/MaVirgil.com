@@ -16,26 +16,41 @@ const { Content } = await render(project)
 
 //other imports
 import { Image } from "astro:assets"
-import {Icon} from "astro-icon/components";
 import { formatDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Alert from "../../components/Alert.astro";
 ---
 
 <BaseLayout title={`Project — ${project.data.title}`} maxWidth="60em">
     <Header />
+    {project.data.finished === false && (
+        <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
+    )}
     <Image src={project.data.cover} alt={project.data.coverAlt}/>
     <div class="project-header">
         <h1 id="project-title">{project.data.title}</h1>
-        <div class="tech-list">
-            <p>Technologies used: </p>
-            {project.data.technologies.map(technology => (
-                <p class="tech-item">{technology}</p>
-            ))}
-        </div>
         <p id="date">{formatDate(project.data.pubDate)}</p>
+
+        {typeof project.data.technologies !== "undefined" && (
+                <div class="tech-list">
+                    <p>Technologies used: </p>
+                    {project.data.technologies.map(technology => (
+                            <p class="tech-item">{technology}</p>
+                    ))}
+                </div>
+        )}
+
+        {typeof project.data.links !== "undefined" && (
+                <div class="link-list">
+                    <p>Links: </p>
+                    {project.data.links.map(link => (
+                            <a href={link.url} target="_blank">{link.name}</a>
+                    ))}
+                </div>
+        )}
+
     </div>
-    <hr id="ruler">
     <div class="content">
         <Content />
     </div>
@@ -43,17 +58,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <style>
 
-    [data-icon="back-icon"] {
-        color: var(--text);
-        font-size: 2em;
-    }
-
-    [data-icon="back-icon"]:hover {
-        color: var(--primary);
+    .project-header, .content {
+        margin: var(--gap-tiny);
     }
 
     img {
-        margin-top: 3em;
+        margin-top: var(--gap-small);
         width: 100%;
         height: auto;
         border-radius: 20px;
@@ -65,18 +75,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     .project-header {
         display: flex;
         flex-direction: column;
+        margin-bottom: var(--gap-medium);
     }
 
     #project-title {
-        margin-bottom: 0;
+        margin-bottom: var(--gap-tiny);
     }
 
-    .tech-list {
+    .tech-list, .link-list {
         display: flex;
-        gap: 0.5em;
+        align-items: end;
+        gap: var(--gap-tiny);
     }
 
-    .tech-list p {
+    .tech-list p, .link-list p {
         margin: .5em 0 0 0;
     }
 
@@ -88,7 +100,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         margin: 0;
         color: var(--text-muted);
     }
-
 
 </style>
 

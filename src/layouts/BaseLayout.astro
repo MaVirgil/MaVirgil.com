@@ -55,27 +55,33 @@ const { maxWidth="50em"} = Astro.props;
     /* dark-mode colors */
     :root {
         --bg-dark: oklch(0.19 0.005 71);
-        --bg-light: oklch(0.15 0.035 69);
+        --bg-light: oklch(0.25 0.01 71);
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
         --highlight: oklch(0.5 0.07 69);
-        --border: oklch(0.4 0.07 69);
-        --border-muted: oklch(0.3 0.07 69);
         --primary: oklch(0.681 0.1586 47.54);
         --secondary: oklch(0.76 0.1 249);
+        --danger: oklch(0.35 0.1 30);
+        --rounding: 18px;
+        --edge-padding: 2em;
+        --gap-tiny: 0.4em;
+        --gap-small: 2em;
+        --gap-medium: 4em;
+        --gap-large: 6em
     }
 
     /* light-mode colors */
     :root.light {
         --bg-dark: oklch(.8 0.06 69);
         --bg-light: oklch(0.96 0.035 69);
-        --text: oklch(0.1825 0.0214 36.85);
+        --text: oklch(0.25 0.0214 36.85);
         --text-muted: oklch(0.4 0.07 69);
         --highlight: oklch(1 0.07 69);
         --border: oklch(0.6 0.07 69);
         --border-muted: oklch(0.7 0.07 69);
-        --primary: oklch(0.5623 0.1147 52.88);
+        --primary: oklch(0.65 0.1586 47.54);
         --secondary: oklch(0.6 0.15 249);
+        --danger: oklch(0.75 0.2 30);
     }
 
     html,
@@ -86,13 +92,13 @@ const { maxWidth="50em"} = Astro.props;
         background-color: var(--bg-dark);
         color: var(--text);
         font-family: Manrope, sans-serif;
-        text-wrap: balance;
+        text-wrap: pretty;
         line-height: 1.6em;
     }
 
     main {
         margin: auto;
-        padding: 0 2em 6em;
+        padding: 0 var(--edge-padding) 6em;
         max-width: var(--maxWidth);
     }
 
@@ -115,10 +121,6 @@ const { maxWidth="50em"} = Astro.props;
     }
 
     li::marker {
-        color: var(--primary);
-    }
-
-    em {
         color: var(--primary);
     }
 </style>
