@@ -17,16 +17,14 @@ links: [
     name: "Github"
   }
 ]
-finished: false
+finished: true
 ---
 
 ## The Goal
 I had a couple of different goals in mind when I started planning this project, the most important being that
 I actually felt it was something I needed. So many times when building stuff (especially through my studies), I've been 
-in a situation where I recognized the learning potential of a project and enjoyed building it, but where the product itself was... well, _useless_.
-
-These kinds of project have their merit, of course, and if all I ever did was build stuff that I truly felt I needed in my life, I would hardly have learned
-anything at all. That being said, I was very excited to jump on the opportunity to work on something that felt _real_, and like I would actually
+in a situation where I recognized the learning potential of a project and enjoyed building it, but where the product itself was... well, _useless_,
+so I was very excited to jump on the opportunity to work on something that felt _real_, and like I would actually
 be using it two months from now.
 
 At this point I had decided that I wanted a website that could:
@@ -40,12 +38,9 @@ workflow for writing and pushing posts. As this was to be a continuously updated
 but also the future workflow of updating it with posts and projects. Here the goal was to be able to push new posts to the site without having to touch code,
 and _especially_ not individual HTML files.
 
-However unlikely it may be, someone might actually find themselves reading the content of one of my posts one day. When they do I wanted to guarantee that the experience
-was as responsive and bloat-free as it could be, and while I'm _sure_ that it's possible to create a blazingly fast and modern SPA with React, I'm also _sure_ that my
-very first experience with those technologies would be anything but that.
-As such, I decided that for this project, simple & responsive was better than flashy & janky.
+I also knew that I wanted the site to be as lightweight as possible, and while I'm _sure_ that it's possible to create a blazingly fast and modern SPA with React, I'm also _sure_ that my
+very first experience with those technologies would be anything but that. As such, I decided that for this project, simple & responsive was better than flashy & janky.
 
-Then came the question of hosting.
 
 Going in, I already had some cursory experience with hosting an earlier project on Azure with a free _Azure for Students_ account. I found this to be
 — rather paradoxically — both a very seamless and automatic process, and an incredibly finicky and frustrating one; creating a resource and connecting it
@@ -55,41 +50,30 @@ main source of my later frustrations due to inconsistent navigation, confusing u
 While I understand the utility of hyperscalers like Azure or AWS for enterprise applications, and I valued the learning experience, the complexity felt disproportionate to 
 the project's scope, and I ultimately fel like I was using a bulldozer to pick up a dime.
 
-Instead of simply using a smaller-scale, more agile PaaS like Vercel or Netlify, I decided that this was my chance to get some experience with self-hosting; that way,
-I could have full control over what was happening on the server, and I would not depend (directly, at least) on big tech companies. To my surprise, 
-the savings from going with a self-hosted solution were also much bigger than I had expected. While I do understand that you are not just paying for 
-raw computing power when using a cloud provider, seeing the price difference reassured me that this was the way to go, even for a small project like this one.
-For a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would 
-have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
+Instead, I decided that this was my chance to get some experience with self-hosting; that way, I could have full control over what was happening on the server, 
+and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
+for a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
 
-
-With all this in mind, I wanted a site that:
-
-- Was as fast as possible, with as little bloat as possible
-- Made writing and pushing posts easy and seamless, without the need for manually editing or adding HTML pages
-- Was self-hosted, and as independent of big-tech as possible
 
 ## The Tech
 
-### Frontend: Astro
-As luck would have it, the Astro.JS framework excels in pretty much exactly what I needed: it can generate static MPAs which means flexible development and fast deployment and perfomance while being incredibly
-user-friendly and simple to get started with for a relative beginner like me. While Astro does use JavaScript (or TypeScript) to generate the static pages, by default it 
-does not actually ship any JS to the client.
+### Astro
+As luck would have it, the [Astro.JS](https://astro.build/) framework does pretty much exactly what I needed for this project, generating static pages with no JavaScript
+shipped to the client out of the box (I use it minimally in this project). It also features a type-safe content management API, allowing me to easily define collections
+like `project` and `post`, and publish new entries as simple `.md` files.
 
-I chose [Astro](https://astro.build/) over React or Next.js for this specific use case. Since a blog is mostly static content, shipping a heavy JavaScript bundle (React hydration) is unnecessary.
-*   **Zero JS by Default:** Astro strips away JavaScript unless explicitly needed.
-*   **Content Collections:** I use Astro's type-safe content API to manage my blog posts and project entries as simple `.md` files.
-*   **Styling:** Custom CSS variables for a flicker-free Dark/Light mode implementation using a blocking script in the `<head>` to prevent FOUC (Flash of Unstyled Content).
+Even as someone with little JavaScript experience, getting started using Astro was a pretty seamless experience
+(it doesn't hurt that they have amazing [docs](https://docs.astro.build/en/getting-started/) as well), and I found myself up and running very quickly, spending minimal time
+getting bogged down by unfamiliar syntax or new patterns. For a project like this, the time it took until I was making key decisions about layout, design, and content was
+just about perfect, although I did periodocially have to take a step back, and stop myself from implementing needless, flashy components just for the sake of it.
 
-### Infrastructure: Hetzner VPS & Docker
-Instead of using managed hosting (Vercel/Netlify), I rented a **CX33** VPS from Hetzner running **Ubuntu 24.04**.
-*   **Firewall:** Configured strict ``iptables`` rules (via Hetzner Cloud Firewall) to only allow SSH, HTTP, and HTTPS traffic.
-*   **Docker:** All services run in isolated containers.
+### Infrastructure
+Instead of using managed hosting (Vercel/Netlify), I rented a VPS from Hetzner and set it up with Ubuntu, with the plan to use Docker to run all my different services in isolated
+containers. Setting up the firewall rules, and generating SSH keys turned out to be fairly straight-forward, even with my limited knowledge of both linux and networking
 
-### CI/CD & Orchestration: Coolify
-To manage deployments, I installed [Coolify](https://coolify.io), an open-source, self-hosted Heroku alternative.
-*   **Workflow:** When I push code to my GitHub repository, Coolify's webhooks trigger a build.
-*   **Reverse Proxy:** It automatically configures Traefik to route traffic from `mavirgil.com` to the correct container.
-*   **SSL:** Automatic Let's Encrypt certificate renewal for HTTPS.
+### CI/CD & Coolify
+To manage deployments, I installed [Coolify](https://coolify.io), an open-source, self-hosted Heroku alternative. Using a GitHub webhook I was able to set up a barebones CD workflow
+with near instant deployment on a push to the production branch of my GitHub repository. All in all I continue to be very impressed with Coolify, bringing the experience of deploying
+and managing my projects up to par (for the most part) with many small-to-medium scale PaaS providers, and it is definitely a tool I plan to continue using for the foreseeable future.
 
 
