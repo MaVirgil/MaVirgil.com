@@ -4,35 +4,36 @@ import IconContainer from "../components/IconContainer.astro"
 import { Content as BioContent} from '../components/content/bio.md'
 import { Icon } from 'astro-icon/components'
 import Header from "../components/Header.astro";
+import { Image } from "astro:assets"
+import profileImage from '../../public/logo.png'
 ---
 
 <BaseLayout title="Magnus Sørensen">
 	<Header />
-	<div id="hero">
-		<BioContent />
-		<div id="contact">
-			<h2>Get in touch:</h2>
-			<div id="contact-info">
-				<IconContainer gap="30px">
-					<a href="https://github.com/MaVirgil" target="_blank" class="icon-container-link">
-						<Icon name="github" />
-					</a>
-
-					<a href="https://www.linkedin.com/in/magnus-virgil-s%C3%B8rensen-0167872b5/" target="_blank" class="icon-container-link">
-						<Icon name="linkedin" />
-					</a>
-
-					<a href="https://bsky.app/profile/magnus-virgil.bsky.social" target="_blank" class="icon-container-link">
-						<Icon name="bluesky" />
-					</a>
-				</IconContainer>
-				<a href="mailto:magnusvirgil@hotmail.com">magnusvirgil@hotmail.com</a>
-			</div>
+	<div class="hero">
+		<div class="bio">
+			<BioContent />
+		</div>
+		<div class="illustration">
+			<Image src={profileImage} alt="illustration of me" />
 		</div>
 	</div>
 </BaseLayout>
 
 <style>
+
+	img {
+		width: 8em;
+		height: auto;
+		fill: var(--text);
+	}
+
+	.hero {
+		margin-top: var(--gap-medium);
+		display: flex;
+		align-items: center;
+	}
+
 	.icon-container-link {
 		width: 24px;
 		height: 24px;
