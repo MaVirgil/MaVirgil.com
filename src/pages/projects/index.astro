@@ -7,7 +7,7 @@ import Header from "../../components/Header.astro";
 
 const projects = (await getCollection('projects')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+).filter(project => project.data.finished === true);
 ---
 
 <BaseLayout title="Projects">
@@ -31,7 +31,7 @@ const projects = (await getCollection('projects')).sort(
 
 <style>
     #projects-header {
-        margin-bottom: 0;
+        margin: 0;
     }
 
     .projects-container {
@@ -39,8 +39,8 @@ const projects = (await getCollection('projects')).sort(
         flex-direction: column;
         box-sizing: content-box;
         align-items: center;
-        gap: 3em;
-        margin: 0 var(--edge-padding) 0;
+        gap: var(--gap-medium);
+        margin: var(--gap-small) var(--edge-padding) 0;
     }
 
     .project-card-anchor-container {
@@ -83,7 +83,7 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .project-description {
-        margin-top: 1em;
+        margin-top: var(--gap-tiny);
     }
 
     @keyframes anim {

@@ -19,10 +19,14 @@ import { Image } from "astro:assets"
 import { formatDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Alert from "../../components/Alert.astro";
 ---
 
 <BaseLayout title={`Project — ${project.data.title}`} maxWidth="60em">
     <Header />
+    {project.data.finished === false && (
+        <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
+    )}
     <Image src={project.data.cover} alt={project.data.coverAlt}/>
     <div class="project-header">
         <h1 id="project-title">{project.data.title}</h1>
@@ -55,12 +59,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 <style>
 
     .project-header, .content {
-        margin: 0.5em;
+        margin: var(--gap-tiny);
     }
 
     img {
-        margin-top: 3em;
-        width: 105%;
+        margin-top: var(--gap-small);
+        width: 100%;
         height: auto;
         border-radius: 20px;
         border-style: solid;
@@ -71,17 +75,17 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     .project-header {
         display: flex;
         flex-direction: column;
-        margin-bottom: 3em;
+        margin-bottom: var(--gap-medium);
     }
 
     #project-title {
-        margin-bottom: 0.2em;
+        margin-bottom: var(--gap-tiny);
     }
 
     .tech-list, .link-list {
         display: flex;
         align-items: end;
-        gap: 0.5em;
+        gap: var(--gap-tiny);
     }
 
     .tech-list p, .link-list p {
@@ -96,7 +100,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         margin: 0;
         color: var(--text-muted);
     }
-
 
 </style>
 

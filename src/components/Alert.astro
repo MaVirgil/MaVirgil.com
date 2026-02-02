@@ -1,0 +1,20 @@
+---
+const { message } = Astro.props;
+---
+
+<div id="alert-box">
+    <h3>{message}</h3>
+</div>
+
+<style>
+    #alert-box {
+        background-color: var(--danger);
+        padding: 0.1em 1em;
+        margin-top: 2em;
+        border-radius: var(--rounding);
+    }
+
+    h3 {
+        font-weight: normal;
+    }
+</style>
