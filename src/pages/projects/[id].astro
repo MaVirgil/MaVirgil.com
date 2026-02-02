@@ -16,7 +16,6 @@ const { Content } = await render(project)
 
 //other imports
 import { Image } from "astro:assets"
-import {Icon} from "astro-icon/components";
 import { formatDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -27,15 +26,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <Image src={project.data.cover} alt={project.data.coverAlt}/>
     <div class="project-header">
         <h1 id="project-title">{project.data.title}</h1>
-        <div class="tech-list">
-            <p>Technologies used: </p>
-            {project.data.technologies.map(technology => (
-                <p class="tech-item">{technology}</p>
-            ))}
-        </div>
         <p id="date">{formatDate(project.data.pubDate)}</p>
+
+        {typeof project.data.technologies !== "undefined" && (
+                <div class="tech-list">
+                    <p>Technologies used: </p>
+                    {project.data.technologies.map(technology => (
+                            <p class="tech-item">{technology}</p>
+                    ))}
+                </div>
+        )}
+
+        {typeof project.data.links !== "undefined" && (
+                <div class="link-list">
+                    <p>Links: </p>
+                    {project.data.links.map(link => (
+                            <a href={link.url} target="_blank">{link.name}</a>
+                    ))}
+                </div>
+        )}
+
     </div>
-    <hr id="ruler">
     <div class="content">
         <Content />
     </div>
@@ -43,18 +54,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <style>
 
-    [data-icon="back-icon"] {
-        color: var(--text);
-        font-size: 2em;
-    }
-
-    [data-icon="back-icon"]:hover {
-        color: var(--primary);
+    .project-header, .content {
+        margin: 0.5em;
     }
 
     img {
         margin-top: 3em;
-        width: 100%;
+        width: 105%;
         height: auto;
         border-radius: 20px;
         border-style: solid;
@@ -65,18 +71,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     .project-header {
         display: flex;
         flex-direction: column;
+        margin-bottom: 3em;
     }
 
     #project-title {
-        margin-bottom: 0;
+        margin-bottom: 0.2em;
     }
 
-    .tech-list {
+    .tech-list, .link-list {
         display: flex;
+        align-items: end;
         gap: 0.5em;
     }
 
-    .tech-list p {
+    .tech-list p, .link-list p {
         margin: .5em 0 0 0;
     }
 

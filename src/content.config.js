@@ -11,7 +11,11 @@ const projects = defineCollection({
         updateDate: z.coerce.date().optional(),
         cover: image(),
         coverAlt: z.string(),
-        technologies: z.array(z.string()),
+        technologies: z.array(z.string()).optional(),
+        links: z.array(z.object({
+            url: z.string(),
+            name: z.string(),
+        })).optional(),
     })
 });
 
