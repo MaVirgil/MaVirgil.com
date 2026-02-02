@@ -35,12 +35,11 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .projects-container {
+        max-width: 40em;
         display: flex;
         flex-direction: column;
-        box-sizing: content-box;
-        align-items: center;
         gap: var(--gap-medium);
-        margin: var(--gap-small) var(--edge-padding) 0;
+        margin: var(--gap-small) auto;
     }
 
     .project-card-anchor-container {
@@ -50,6 +49,7 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .project-card {
+        overflow: hidden;
         max-width: 40em;
         padding: 1.3em;
         background-color: var(--bg-light);

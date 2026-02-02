@@ -9,6 +9,7 @@ import icon from 'astro-icon';
 export default defineConfig({
   site: "https://mavirgil.com",
   output: "static",
+  prefetch: true,
   markdown: {
     rehypePlugins: [
         [

@@ -34,7 +34,6 @@ const { maxWidth="50em"} = Astro.props;
             document.documentElement.classList.remove('light');
         }
     </script>
-
 </head>
 <body>
 <main>
@@ -44,13 +43,8 @@ const { maxWidth="50em"} = Astro.props;
 </html>
 
 <style is:global define:vars={{maxWidth}}>
-    @font-face {
-        font-family: 'Manrope';
-        src: url("/manrope.woff2") format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
     /* dark-mode colors */
     :root {
@@ -91,7 +85,7 @@ const { maxWidth="50em"} = Astro.props;
         min-height: 100vh;
         background-color: var(--bg-dark);
         color: var(--text);
-        font-family: Manrope, sans-serif;
+        font-family: Verdana, sans-serif;
         text-wrap: pretty;
         line-height: 1.6em;
     }
