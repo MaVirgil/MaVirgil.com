@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
 import IconContainer from "../components/IconContainer.astro"
-import { Content as BioContent} from '../components/content/bio.md'
+import { Content as BioContent} from '../content/bio.md'
 import { Icon } from 'astro-icon/components'
 import Header from "../components/Header.astro";
 import { Image } from "astro:assets"
@@ -34,6 +34,7 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 		margin-top: var(--gap-medium);
 		display: flex;
 		align-items: center;
+		text-wrap: balance;
 	}
 
 	img {
@@ -53,7 +54,7 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 	}
 
 	#contact-info {
-		margin-top: var(--gap-small);
+		margin-top: var(--gap-tiny);
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--gap-tiny);
