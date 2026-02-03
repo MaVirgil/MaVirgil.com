@@ -1,7 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 const { title="default title" } = Astro.props;
-const { maxWidth="25em"} = Astro.props;
+const { maxWidth="30em"} = Astro.props;
 import ThemeSwitcher from "../components/ThemeSwitcher.astro"
 ---
 
@@ -37,6 +37,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
     </script>
 </head>
 <body>
+    <ThemeSwitcher />
 <main>
     <slot />
 </main>
