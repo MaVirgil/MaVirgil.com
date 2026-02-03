@@ -16,16 +16,13 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
     <script is:inline>
         const theme = (() => {
             if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                console.log('return theme from localStorage');
                 return localStorage.getItem('theme');
             }
 
             if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-                console.log('prefers light: true -- returning "light"');
                 return 'light';
             }
 
-            console.log('prefers light: false -- returning "dark"');
             return 'dark';
         })();
 
@@ -60,7 +57,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         --gap-tiny: 0.4em;
         --gap-small: 2em;
         --gap-medium: 4em;
-        --gap-large: 6em
+        --gap-large: 6em;
     }
 
     /* light-mode colors */
@@ -75,6 +72,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
 
     html,
     body {
+        scrollbar-gutter: stable;
         margin: 0;
         width: 100%;
         min-height: 100vh;
