@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { formatDate} from "../../scripts/utils";
+import {formatDate, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
 import { Image } from "astro:assets"
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 
 const projects = (await getCollection('projects')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    (a, b) => getLatestDateField(b) - getLatestDateField(a)
 ).filter(project => project.data.finished === true);
 ---
 
@@ -19,7 +19,7 @@ const projects = (await getCollection('projects')).sort(
                     <Image src={project.data.cover} alt={project.data.coverAlt} />
                     <div class="project-data">
                         <h3 class="project-title">{project.data.title}</h3>
-                        <p class="date">{formatDate(project.data.pubDate)}</p>
+                        <p class="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
                         <p class="project-description">{project.data.description}</p>
                     </div>
                 </div>
@@ -55,8 +55,7 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .project-card:hover {
-        outline-style: dashed;
-        outline-color: var(--text-muted);
+        outline: var(--text-muted) dashed 2px;
         animation: anim 150ms 1 forwards;
     }
 
@@ -82,5 +81,14 @@ const projects = (await getCollection('projects')).sort(
 
     .project-description {
         margin-top: var(--gap-tiny);
+    }
+
+    @keyframes anim {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.02);
+        }
     }
 </style>
