@@ -5,7 +5,6 @@ import { Content as BioContent} from '../content/bio.md'
 import { Icon } from 'astro-icon/components'
 import Header from "../components/Header.astro";
 import { Image } from "astro:assets"
-import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 ---
 
 <BaseLayout title="Magnus Sørensen">
@@ -15,7 +14,7 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 			<BioContent />
 		</div>
 		<div class="illustration">
-			<Image src={profileImage} alt="illustration of me" />
+			<Icon name="profile[placeholder]_new"/>
 		</div>
 	</div>
 	<div id="contact-info">
@@ -37,20 +36,15 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 		text-wrap: balance;
 	}
 
+	.illustration [data-icon="profile[placeholder]_new"] {
+		font-size: 10em;
+		color: var(--text);
+	}
+
 	img {
 		width: 8em;
 		height: auto;
 		fill: var(--text);
-	}
-
-	[data-icon] {
-		cursor: pointer;
-		font-size: 1.5em;
-	}
-
-	[data-icon]:hover {
-		color: var(--primary);
-		animation: icon-anim 50ms 1 forwards;
 	}
 
 	#contact-info {
@@ -58,6 +52,16 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--gap-tiny);
+	}
+
+	#contact-info [data-icon] {
+		cursor: pointer;
+		font-size: 1.5em;
+	}
+
+	#contact-info [data-icon]:hover {
+		color: var(--primary);
+		animation: icon-anim 50ms 1 forwards;
 	}
 
 	#contact-info a {

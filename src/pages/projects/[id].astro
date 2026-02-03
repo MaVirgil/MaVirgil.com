@@ -16,21 +16,21 @@ const { Content } = await render(project)
 
 //other imports
 import { Image } from "astro:assets"
-import { formatDate} from "../../scripts/utils";
+import {formatDate, hasUpdateDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
 ---
 
-<BaseLayout title={`Project — ${project.data.title}`} maxWidth="60em">
+<BaseLayout title={`Project — ${project.data.title}`}>
     <Header />
     {project.data.finished === false && (
         <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
     )}
-    <Image src={project.data.cover} alt={project.data.coverAlt}/>
+    <Image src={project.data.cover} alt={project.data.coverAlt} />
     <div class="project-header">
         <h1 id="project-title">{project.data.title}</h1>
-        <p id="date">{formatDate(project.data.pubDate)}</p>
+        <p id="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
 
         {typeof project.data.technologies !== "undefined" && (
                 <div class="tech-list">
@@ -57,9 +57,12 @@ import Alert from "../../components/Alert.astro";
 </BaseLayout>
 
 <style>
-
     .project-header, .content {
         margin: var(--gap-tiny);
+    }
+
+    .content {
+        margin-bottom: var(--gap-large);
     }
 
     img {
