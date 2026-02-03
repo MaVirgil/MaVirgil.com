@@ -5,7 +5,7 @@ import { Content as BioContent} from '../components/content/bio.md'
 import { Icon } from 'astro-icon/components'
 import Header from "../components/Header.astro";
 import { Image } from "astro:assets"
-import profileImage from '../../public/logo.png'
+import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 ---
 
 <BaseLayout title="Magnus Sørensen">
@@ -17,6 +17,14 @@ import profileImage from '../../public/logo.png'
 		<div class="illustration">
 			<Image src={profileImage} alt="illustration of me" />
 		</div>
+	</div>
+	<div id="contact-info">
+		<IconContainer>
+			<Icon name="github" />
+			<Icon name="linkedin" />
+			<Icon name="bluesky" />
+		</IconContainer>
+		<a href="mailto:magnusvirgil@hotmail.com">Magnusvirgil@hotmail.com</a>
 	</div>
 </BaseLayout>
 
@@ -63,8 +71,10 @@ import profileImage from '../../public/logo.png'
 	}
 
 	#contact-info {
+		margin-top: var(--gap-small);
 		display: inline-flex;
 		flex-direction: column;
+		gap: var(--gap-tiny);
 	}
 
 	#contact-info a {
