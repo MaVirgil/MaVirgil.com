@@ -13,7 +13,6 @@ const projects = (await getCollection('projects')).sort(
 <BaseLayout title="Projects">
     <Header></Header>
     <div class="projects-container">
-        <h1 id="projects-header">Projects:</h1>
         {projects.map(project => (
             <a href={`/projects/${project.id}`} class="project-card-anchor-container">
                 <div class="project-card">
@@ -38,7 +37,7 @@ const projects = (await getCollection('projects')).sort(
         max-width: 40em;
         display: flex;
         flex-direction: column;
-        gap: var(--gap-medium);
+        gap: var(--gap-small);
         margin: var(--gap-small) auto;
     }
 
@@ -51,13 +50,13 @@ const projects = (await getCollection('projects')).sort(
     .project-card {
         overflow: hidden;
         max-width: 40em;
-        padding: 1.3em;
-        background-color: var(--bg-light);
+        padding: 0.8em;
         border-radius: var(--rounding);
     }
 
     .project-card:hover {
-        box-shadow-color: var(--primary);
+        outline-style: dashed;
+        outline-color: var(--text-muted);
         animation: anim 150ms 1 forwards;
     }
 
@@ -65,7 +64,6 @@ const projects = (await getCollection('projects')).sort(
         width: 100%;
         height: auto;
         border-radius: 20px;
-        border-style: solid var(--primary);
     }
 
     .project-data {
@@ -84,16 +82,5 @@ const projects = (await getCollection('projects')).sort(
 
     .project-description {
         margin-top: var(--gap-tiny);
-    }
-
-    @keyframes anim {
-        0% {
-            transform: scale(1);
-            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
-        }
-        100% {
-            transform: scale(1.02);
-            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
-        }
     }
 </style>

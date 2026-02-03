@@ -1,12 +1,12 @@
 ---
-const { gap } = Astro.props;
+
 ---
 
 <div id="icons">
     <slot />
 </div>
 
-<style define:vars={{gap}}>
+<style>
     #container {
         display: flex;
         justify-content: flex-start;
@@ -16,6 +16,5 @@ const { gap } = Astro.props;
     #icons {
         display: flex;
         justify-content: space-between;
-        gap: var(--gap);
     }
 </style>
