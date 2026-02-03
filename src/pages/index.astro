@@ -24,17 +24,11 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 			<Icon name="linkedin" />
 			<Icon name="bluesky" />
 		</IconContainer>
-		<a href="mailto:magnusvirgil@hotmail.com">Magnusvirgil@hotmail.com</a>
+		<a href="mailto:Magnus@mavirgil.com">Magnus@mavirgil.com</a>
 	</div>
 </BaseLayout>
 
 <style>
-
-	img {
-		width: 8em;
-		height: auto;
-		fill: var(--text);
-	}
 
 	.hero {
 		margin-top: var(--gap-medium);
@@ -42,32 +36,20 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 		align-items: center;
 	}
 
-	.icon-container-link {
-		width: 24px;
-		height: 24px;
+	img {
+		width: 8em;
+		height: auto;
+		fill: var(--text);
 	}
 
 	[data-icon] {
+		cursor: pointer;
 		font-size: 1.5em;
 	}
 
 	[data-icon]:hover {
 		color: var(--primary);
 		animation: icon-anim 50ms 1 forwards;
-	}
-
-	@keyframes icon-anim {
-		0% {
-			transform: scale(1);
-		}
-		100% {
-			transform: scale(1.1);
-		}
-	}
-
-	#contact h2 {
-		font-weight: normal;
-		margin-bottom: 0.5em;
 	}
 
 	#contact-info {
@@ -81,4 +63,12 @@ import profileImage from '../../public/profile-simple-svgrepo-com.svg'
 		display: inline;
 	}
 
+	@keyframes icon-anim {
+		0% {
+			transform: scale(1);
+		}
+		100% {
+			transform: scale(1.1);
+		}
+	}
 </style>
