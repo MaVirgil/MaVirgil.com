@@ -22,7 +22,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
 ---
 
-<BaseLayout title={`Project — ${project.data.title}`}>
+<BaseLayout title={`Project — ${project.data.title}`} maxWidth="40em">
     <Header />
     {project.data.finished === false && (
         <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
