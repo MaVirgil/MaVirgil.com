@@ -1,7 +1,5 @@
 //Date utils
 
-const locale = 'en-GB'
-
 export function formatDate(date) {
     return new Date(date).toLocaleDateString('en-GB')
 }
