@@ -1,8 +1,9 @@
 # todo
  - [ ] Add functionality for blog posts (using collections)
  - [x] Add functionality for Project posts
- - [ ] configure prefetching
+ - [ ] configure prefetching (or other perfomance)
  - [ ] Style general text (line space, headings etc. )
+ - [ ] Fix responsive design for small screens
  - [ ] Look into styling of special elements (syntax highlightning etc.)
  - [ ] Add page with overview of Blog posts
  - [x] Add page with overview of Project posts
