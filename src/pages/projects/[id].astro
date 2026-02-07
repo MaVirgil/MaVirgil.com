@@ -20,6 +20,7 @@ import {formatDate, hasUpdateDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
+import Prose from "../../components/Prose.astro";
 ---
 
 <BaseLayout title={`Project — ${project.data.title}`} maxWidth="40em">
@@ -57,9 +58,9 @@ import Alert from "../../components/Alert.astro";
             )}
         </div>
 
-        <div id="content">
+        <Prose>
             <Content />
-        </div>
+        </Prose>
 
     </div>
 </BaseLayout>
@@ -78,9 +79,7 @@ import Alert from "../../components/Alert.astro";
         width: 100%;
         height: auto;
         border-radius: 20px;
-        border-style: solid;
-        border-color: var(--primary);
-        border-width: 2px;
+        box-shadow: 0 0 5px black;
     }
 
     .project-header {

@@ -5,14 +5,15 @@ import { Content as BioContent} from '../content/bio.md'
 import { Icon } from 'astro-icon/components'
 import Header from "../components/Header.astro";
 import { Image } from "astro:assets"
+import Prose from "../components/Prose.astro";
 ---
 
 <BaseLayout title="Magnus Sørensen">
 	<Header />
 	<div class="hero">
-		<div class="bio">
+		<Prose>
 			<BioContent />
-		</div>
+		</Prose>
 		<div class="illustration">
 			<Icon name="profile[placeholder]_new"/>
 		</div>

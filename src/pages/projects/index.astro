@@ -50,13 +50,12 @@ const projects = (await getCollection('projects')).sort(
     .project-card {
         overflow: hidden;
         max-width: 40em;
-        padding: 0.8em;
-        padding-bottom: 0;
+        padding: 0.8em 0.8em 0;
         border-radius: var(--rounding);
+        box-shadow: 0 0 7px black
     }
 
     .project-card:hover {
-        outline: var(--text-muted) dashed 2px;
         animation: anim 150ms 1 forwards;
     }
 
@@ -67,8 +66,7 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .project-data {
-        margin: 0.5em;
-        margin-bottom: 0;
+        margin: 0.5em 0.5em 0;
     }
 
     .project-title {
@@ -86,11 +84,9 @@ const projects = (await getCollection('projects')).sort(
     }
 
     @keyframes anim {
-        0% {
-            transform: scale(1);
-        }
         100% {
-            transform: scale(1.02);
+            transform: scale(1.01);
+            box-shadow: 0 0 15px black
         }
     }
 </style>
