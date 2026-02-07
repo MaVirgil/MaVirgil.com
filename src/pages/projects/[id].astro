@@ -23,36 +23,44 @@ import Alert from "../../components/Alert.astro";
 ---
 
 <BaseLayout title={`Project — ${project.data.title}`} maxWidth="40em">
+
     <Header />
-    {project.data.finished === false && (
-        <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
-    )}
-    <Image src={project.data.cover} alt={project.data.coverAlt} />
-    <div class="project-header">
-        <h1 id="project-title">{project.data.title}</h1>
-        <p id="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
 
-        {typeof project.data.technologies !== "undefined" && (
-                <div class="tech-list">
-                    <p>Technologies used: </p>
-                    {project.data.technologies.map(technology => (
-                            <p class="tech-item">{technology}</p>
-                    ))}
-                </div>
+    <div id="project">
+
+        {project.data.finished === false && (
+            <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
         )}
 
-        {typeof project.data.links !== "undefined" && (
-                <div class="link-list">
-                    <p>Links: </p>
-                    {project.data.links.map(link => (
-                            <a href={link.url} target="_blank">{link.name}</a>
-                    ))}
-                </div>
-        )}
+        <Image src={project.data.cover} alt={project.data.coverAlt}/>
 
-    </div>
-    <div class="content">
-        <Content />
+        <div class="project-header">
+            <h1 id="project-title">{project.data.title}</h1>
+            <p id="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
+
+            {typeof project.data.technologies !== "undefined" && (
+                    <div class="tech-list">
+                        <p>Technologies used: </p>
+                        {project.data.technologies.map(technology => (
+                                <p class="tech-item">{technology}</p>
+                        ))}
+                    </div>
+            )}
+
+            {typeof project.data.links !== "undefined" && (
+                    <div class="link-list">
+                        <p>Links: </p>
+                        {project.data.links.map(link => (
+                                <a href={link.url} target="_blank">{link.name}</a>
+                        ))}
+                    </div>
+            )}
+        </div>
+
+        <div id="content">
+            <Content />
+        </div>
+
     </div>
 </BaseLayout>
 
@@ -61,7 +69,7 @@ import Alert from "../../components/Alert.astro";
         margin: var(--gap-tiny);
     }
 
-    .content {
+    #project {
         margin-bottom: var(--gap-large);
     }
 
