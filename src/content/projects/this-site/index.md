@@ -33,19 +33,6 @@ At this point I had decided that I wanted a website that could:
  - Act as a digital business card of sorts, with contact details and a summary of my profile
  - Give me a place to write about interesting stuff I learn while working on projects, that isn't necessarily a project in itself
 
-```js
-function outOne(output) {
-    console.log(output);
-}
-
-const outTwo = output => {
-    console.log(output);
-}
-
-outTwo('test');
-// => test
-```
-
 In addition to these more functional requirements, I also had some technical concerns regarding performance, hosting, and especially my
 workflow for writing and pushing posts. As this was to be a continuously updated site, I not only had to consider the developer experience of actually building it,
 but also the future workflow of updating it with posts and projects. Here the goal was to be able to push new posts to the site without having to touch code,
