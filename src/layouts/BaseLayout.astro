@@ -51,6 +51,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
         --primary: oklch(0.681 0.1586 47.54);
+        --secondary: oklch(0.70 0.07 250);
         --danger: oklch(0.35 0.1 30);
         --rounding: 18px;
         --edge-padding: 2em;
@@ -58,6 +59,20 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         --gap-small: 2em;
         --gap-medium: 4em;
         --gap-large: 6em;
+    }
+
+    .astro-code {
+        padding: 1.2em;
+        border-radius: var(--rounding);
+    }
+
+    :root:not(.light) .astro-code,
+    :root:not(.light) .astro-code span {
+        color: var(--shiki-dark) !important;
+        background-color: var(--shiki-dark-bg) !important;
+        font-style: var(--shiki-dark-font-style) !important;
+        font-weight: var(--shiki-dark-font-weight) !important;
+        text-decoration: var(--shiki-dark-text-decoration) !important;
     }
 
     /* light-mode colors */
@@ -68,6 +83,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         --primary: oklch(0.65 0.1586 47.54);
         --secondary: oklch(0.6 0.15 249);
         --danger: oklch(0.75 0.2 30);
+        --shiki-background: oklch(.9 0.04 69);
     }
 
     html,
