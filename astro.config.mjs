@@ -16,6 +16,7 @@ export default defineConfig({
         dark: "github-dark",
         light: "github-light",
       },
+      defaultColor: false,
     },
     rehypePlugins: [
         [

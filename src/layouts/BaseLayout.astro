@@ -48,6 +48,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
     /* dark-mode colors */
     :root {
         --bg: oklch(0.19 0.005 71);
+        --bg-element: oklch(0.25 0.005 71);
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
         --primary: oklch(0.681 0.1586 47.54);
@@ -59,6 +60,14 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         --gap-small: 2em;
         --gap-medium: 4em;
         --gap-large: 6em;
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-dark);
+            background-color: var(--bg-element);
+            font-style: var(--shiki-dark-font-style);
+            font-weight: var(--shiki-dark-font-weight);
+            text-decoration: var(--shiki-dark-text-decoration);
+        }
     }
 
     .astro-code {
@@ -66,24 +75,22 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro"
         border-radius: var(--rounding);
     }
 
-    :root:not(.light) .astro-code,
-    :root:not(.light) .astro-code span {
-        color: var(--shiki-dark) !important;
-        background-color: var(--shiki-dark-bg) !important;
-        font-style: var(--shiki-dark-font-style) !important;
-        font-weight: var(--shiki-dark-font-weight) !important;
-        text-decoration: var(--shiki-dark-text-decoration) !important;
-    }
-
     /* light-mode colors */
     :root.light {
         --bg: oklch(.8 0.06 69);
+        --bg-element: oklch(.87 0.05 69);
         --text: oklch(0.15 0.0412 36.85);
         --text-muted: oklch(0.4 0.07 69);
         --primary: oklch(0.65 0.1586 47.54);
         --secondary: oklch(0.6 0.15 249);
         --danger: oklch(0.75 0.2 30);
-        --shiki-background: oklch(.9 0.04 69);
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-light);
+            font-style: var(--shiki-light-font-style);
+            font-weight: var(--shiki-light-font-weight);
+            text-decoration: var(--shiki-light-text-decoration);
+        }
     }
 
     html,
