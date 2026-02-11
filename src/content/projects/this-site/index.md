@@ -54,6 +54,17 @@ Instead, I decided that this was my chance to get some experience with self-host
 and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
 for a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
 
+```js
+const newFunction = (message) => {
+    return () => {
+        console.log(message);
+    }
+}
+
+const sayHello = newFunction('hello!');
+
+sayHello();
+```
 
 ## The Tech
 
