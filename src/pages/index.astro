@@ -15,7 +15,7 @@ import Prose from "../components/Prose.astro";
 			<BioContent />
 		</Prose>
 		<div class="illustration">
-			<Icon name="profile[placeholder]_new"/>
+			<Icon name="profile"/>
 		</div>
 	</div>
 	<div id="contact-info">
@@ -42,9 +42,13 @@ import Prose from "../components/Prose.astro";
 		align-items: center;
 	}
 
-	.illustration [data-icon="profile[placeholder]_new"] {
-		font-size: 10em;
+	.illustration [data-icon="profile"] {
+		font-size: 15em;
 		color: var(--text);
+	}
+
+	:root.light .illustration [data-icon="profile"] {
+		color: var(--bg-element);
 	}
 
 	img {
