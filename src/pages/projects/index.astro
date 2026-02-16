@@ -11,7 +11,6 @@ const projects = (await getCollection('projects')).sort(
 ---
 
 <BaseLayout title="Projects">
-    <Header></Header>
     <div class="projects-container">
         {projects.map(project => (
             <a href={`/projects/${project.id}`} class="project-card-anchor-container">
@@ -44,7 +43,6 @@ const projects = (await getCollection('projects')).sort(
     .project-card-anchor-container {
         color: var(--text);
         text-decoration: none;
-        cursor: pointer;
     }
 
     .project-card {
@@ -52,6 +50,7 @@ const projects = (await getCollection('projects')).sort(
         max-width: 40em;
         padding: 0.8em 0.8em 0;
         border-radius: var(--rounding);
+        background-color: var(--bg-element);
         box-shadow: 0 0 7px black;
     }
 

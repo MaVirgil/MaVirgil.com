@@ -24,7 +24,7 @@ import { Icon } from 'astro-icon/components'
 <style>
 
     #theme-toggle {
-        position: fixed;
+        position: absolute;
         right: 2em;
         top: 2em;
     }
@@ -43,16 +43,12 @@ import { Icon } from 'astro-icon/components'
 
     [data-icon="darkmode-toggle-icon"]:hover {
         color: var(--primary);
-        animation: icon-anim 150ms 1 forwards;
+        transform: scale(1.1);
     }
 
-    @keyframes icon-anim {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(1.1);
+    @Media (max-width: 450px) {
+        #theme-toggle {
+            display: none;
         }
     }
-
 </style>
