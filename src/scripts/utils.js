@@ -6,7 +6,7 @@ export function formatDate(date) {
 
 export function getLatestDateField(project) {
     if (project.data.ignoreUpdateDate) {
-        return true
+        return project.data.pubDate.valueOf();
     }
 
     return project.data.updateDate?.valueOf() > project.data.pubDate.valueOf() ? project.data.updateDate : project.data.pubDate;
