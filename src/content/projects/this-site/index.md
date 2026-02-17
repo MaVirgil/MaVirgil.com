@@ -2,7 +2,6 @@
 title: Blog/Portfolio with Astro & Coolify
 description: My personal portfolio/blog site and how I host it
 pubDate: 2026-02-01
-updateDate: 2026-02-02
 cover: './cover.png'
 coverAlt: "A screenshot of my personal blog/portfolio"
 technologies: [
@@ -17,7 +16,7 @@ links: [
     name: "Github"
   }
 ]
-finished: true
+finished: false
 ---
 
 ## The Goal
