@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from "astro:content";
+
+//Generate path for every project in collection 'projects' @ src/content/projects
+export async function getStaticPaths() {
+    const posts = await getCollection('posts');
+    return posts.map(post => ({
+        params: {id: post.id},
+        props: { post },
+    }));
+}
+
+//get content for rendering site
+const { post } = Astro.props;
+const { Content } = await render(post)
+
+//other imports
+import { Image } from "astro:assets"
+import {formatDate, hasUpdateDate} from "../../scripts/utils";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Alert from "../../components/Alert.astro";
+import Prose from "../../components/Prose.astro";
+---
+
+<BaseLayout title={`Post — ${post.data.title}`} maxWidth="40em">
+
+    <Header />
+    <Prose>
+        <Content />
+    </Prose>
+</BaseLayout>
+
+<style>
+    .project-header, .content {
+        margin: var(--gap-tiny);
+    }
+
+    #project {
+        margin-top: var(--gap-medium);
+        margin-bottom: var(--gap-large);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 0 5px black;
+    }
+
+    .project-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: var(--gap-medium);
+    }
+
+    #project-title {
+        margin-bottom: 0;
+    }
+
+    .tech-list, .link-list {
+        display: flex;
+        align-items: end;
+        gap: var(--gap-tiny);
+    }
+
+    .tech-list p, .link-list p {
+        margin: .5em 0 0 0;
+    }
+
+    .tech-item {
+        color: var(--secondary);
+    }
+
+    #date {
+        margin: 0 0 var(--gap-tiny);
+        color: var(--text-muted);
+    }
+
+</style>
+
+

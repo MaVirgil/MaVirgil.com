@@ -22,7 +22,15 @@ const projects = defineCollection({
 });
 
 const posts = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/posts"})
+    loader: glob({ pattern: "**/*.md", base: "./src/content/posts"}),
+    schema: () => z.object({
+        title: z.string(),
+        description: z.string(),
+        pubDate: z.coerce.date(),
+        updateDate: z.coerce.date().optional(),
+        ignoreUpdateDate: z.boolean().optional(),
+        finished: z.boolean(),
+    })
 });
 
 export const collections = { projects, posts };
