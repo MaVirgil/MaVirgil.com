@@ -16,7 +16,7 @@ links: [
     name: "Github"
   }
 ]
-finished: false
+finished: true
 ---
 
 ## The Goal
