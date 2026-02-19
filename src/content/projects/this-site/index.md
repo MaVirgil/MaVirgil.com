@@ -46,7 +46,7 @@ to my CI/CD workflow using _GitHub Actions_ for automatic deployment was made tr
 main source of my later frustrations due to inconsistent navigation, confusing user-flow, and general unresponsiveness.
 
 While I understand the utility of hyperscalers like Azure or AWS for enterprise applications, and I valued the learning experience, the complexity felt disproportionate to 
-the project's scope, and I ultimately fel like I was using a bulldozer to pick up a dime.
+the project's scope, and I ultimately felt like I was using a bulldozer to pick up a dime.
 
 Instead, I decided that this was my chance to get some experience with self-hosting; that way, I could have full control over what was happening on the server, 
 and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
