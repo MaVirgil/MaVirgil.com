@@ -8,6 +8,7 @@
  - [x] Add page with overview of Blog posts
  - [x] Add page with overview of Project posts
  - [ ] Finish blog post page
+- [ ] BUG - scrollbar gutters not updating on theme-change
  - [ ] Look into styling of inline code-blocks
  - [ ] Change 404 page
 
