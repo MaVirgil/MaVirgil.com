@@ -6,7 +6,6 @@ cover: './cover.png'
 coverAlt: "A screenshot of my personal blog/portfolio"
 technologies: [
   'JavaScript',
-  'Astro.JS',
   'HTML',
   'CSS',
 ]
