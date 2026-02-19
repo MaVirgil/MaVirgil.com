@@ -31,6 +31,7 @@ import Prose from "../components/Prose.astro";
 		</div>
 		<div class="illustration">
 			<Icon name="profile"/>
+			<Icon name="profile_light"/>
 		</div>
 	</div>
 </BaseLayout>
@@ -52,13 +53,25 @@ import Prose from "../components/Prose.astro";
 		}
 	}
 
-	.illustration [data-icon="profile"] {
+	.illustration [data-icon="profile"],
+	.illustration [data-icon="profile_light"]
+	{
 		font-size: 10em;
 		color: var(--text);
 	}
 
-	:root.light .illustration [data-icon="profile"] {
-		color: antiquewhite;
+	.illustration [data-icon="profile_light"] {
+		display: none;
+	}
+
+	:root.light {
+		.illustration [data-icon="profile"] {
+			display: none;
+		}
+
+		.illustration [data-icon="profile_light"] {
+			display: unset;
+		}
 	}
 
 	.bio {
