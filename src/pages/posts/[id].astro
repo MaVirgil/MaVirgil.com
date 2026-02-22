@@ -26,57 +26,45 @@ import Prose from "../../components/Prose.astro";
 <BaseLayout title={`Post — ${post.data.title}`} maxWidth="40em">
 
     <Header />
-    <Prose>
-        <Content />
-    </Prose>
+    <div class="post">
+
+        <div class="post-header">
+            <h1 class="post-title">{post.data.title}</h1>
+            <p class="date">{formatDate(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDate(post.data.updateDate)})`)}</p>
+            <p class="post-description">{post.data.description}</p>
+        </div>
+
+        <Prose>
+            <Content />
+        </Prose>
+
+    </div>
 </BaseLayout>
 
 <style>
-    .project-header, .content {
-        margin: var(--gap-tiny);
-    }
 
-    #project {
+    .post {
         margin-top: var(--gap-medium);
         margin-bottom: var(--gap-large);
     }
 
-    img {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 0 5px black;
-    }
-
-    .project-header {
-        display: flex;
-        flex-direction: column;
+    .post-header {
         margin-bottom: var(--gap-medium);
     }
 
-    #project-title {
-        margin-bottom: 0;
+    .post-title {
+        margin: 0;
     }
 
-    .tech-list, .link-list {
-        display: flex;
-        align-items: end;
-        gap: var(--gap-tiny);
-    }
-
-    .tech-list p, .link-list p {
-        margin: .5em 0 0 0;
-    }
-
-    .tech-item {
-        color: var(--secondary);
-    }
-
-    #date {
+    .date {
         margin: 0 0 var(--gap-tiny);
         color: var(--text-muted);
     }
 
+    .post-description {
+        color: var(--text-muted);
+        font-style: italic;
+    }
 </style>
 
 
