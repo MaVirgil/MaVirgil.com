@@ -1,37 +1,24 @@
 ---
 
-import ThemeSwitcher from "./ThemeSwitcher.astro";
 ---
 
 <header id="header">
-    <a href="/" id="logo">Magnus Sørensen</a>
-    <div id="header-menu">
-       <!-- <a href="#">Posts</a> -->
-        <a href="/projects">Projects</a>
-        <ThemeSwitcher />
-    </div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/projects" data-astro-prefetch>Projects</a>
+        <!--<a href="/posts">Posts</a>-->
+    </nav>
 </header>
-<hr>
 
 <style>
     #header {
-        padding-top: 1.5em;
+        padding-top: var(--gap-small);
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #logo {
-        font-size: 1.5em;
-        font-weight: bolder;
-    }
-
-    #logo:hover {
-        color: var(--text);
+        justify-content: center;
     }
 
     a {
-        font-size: large;
+        font-size: larger;
         text-decoration: none;
     }
 
@@ -39,9 +26,9 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         color: var(--primary);
     }
 
-    #header-menu {
+    nav {
         display: flex;
-        align-items: center;
-        gap: 2em;
+        justify-content: space-between;
+        gap: var(--gap-small);
     }
 </style>

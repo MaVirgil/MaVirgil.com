@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import {formatDateFull, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+
+const posts = (await getCollection('posts')).sort(
+    (a, b) => getLatestDateField(b) - getLatestDateField(a)
+).filter(project => project.data.finished === true);
+---
+
+<BaseLayout title="Posts">
+    <Header />
+    <div class="posts-container">
+        {posts.length === 0 && (
+                <p>No posts Found!</p>
+        )}
+
+        {posts.map(post => (
+            <a href={`/posts/${post.id}`} class="post-anchor-container">
+                <div class="post-container">
+                    <h3 class="post-title">{post.data.title}</h3>
+                    <p class="date">{formatDateFull(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDateFull(post.data.updateDate)})`)}</p>
+                    <p class="post-description">{post.data.description}</p>
+                    <hr>
+                </div>
+            </a>
+        ))}
+    </div>
+</BaseLayout>
+
+<style>
+    .post-anchor-container {
+        text-decoration: none;
+    }
+
+    .post-anchor-container:hover {
+        .post-description {
+            color: var(--text);
+        }
+    }
+    .posts-container {
+        max-width: 40em;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-small);
+        margin: var(--gap-medium) auto;
+    }
+
+    .post-title {
+        margin-bottom: 0;
+    }
+
+    .date {
+        margin: 0 0 var(--gap-tiny);
+        color: var(--text-muted);
+    }
+
+</style>

@@ -16,89 +16,127 @@ const { Content } = await render(project)
 
 //other imports
 import { Image } from "astro:assets"
-import { formatDate} from "../../scripts/utils";
+import {formatDateFull, formatDateYear, hasUpdateDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
+import Prose from "../../components/Prose.astro";
 ---
 
-<BaseLayout title={`Project — ${project.data.title}`} maxWidth="60em">
+<BaseLayout title={`Project — ${project.data.title}`} maxWidth="45em">
+
     <Header />
-    {project.data.finished === false && (
-        <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
-    )}
-    <Image src={project.data.cover} alt={project.data.coverAlt}/>
-    <div class="project-header">
-        <h1 id="project-title">{project.data.title}</h1>
-        <p id="date">{formatDate(project.data.pubDate)}</p>
 
-        {typeof project.data.technologies !== "undefined" && (
-                <div class="tech-list">
-                    <p>Technologies used: </p>
-                    {project.data.technologies.map(technology => (
-                            <p class="tech-item">{technology}</p>
-                    ))}
-                </div>
+    <div class="project">
+
+        {project.data.finished === false && (
+            <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
         )}
 
-        {typeof project.data.links !== "undefined" && (
-                <div class="link-list">
-                    <p>Links: </p>
-                    {project.data.links.map(link => (
-                            <a href={link.url} target="_blank">{link.name}</a>
-                    ))}
-                </div>
-        )}
+        <Image src={project.data.cover} alt={project.data.coverAlt}/>
 
-    </div>
-    <div class="content">
-        <Content />
+        <div class="project-header">
+
+            <div class="project-title-container">
+                <h1 class="project-title">{project.data.title}</h1>
+            </div>
+
+            <p class="date">{formatDateFull(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDateFull(project.data.updateDate)})`)}</p>
+
+            {typeof project.data.technologies !== "undefined" && (
+                    <div class="tech-list">
+                        <p>Technologies: </p>
+                        {project.data.technologies.map(technology => (
+                                <p class="tech-item">{technology}</p>
+                        ))}
+                    </div>
+            )}
+
+            {typeof project.data.links !== "undefined" && (
+                    <div class="link-list">
+                        <p>Links: </p>
+                        {project.data.links.map(link => (
+                                <a href={link.url} target="_blank">{link.name}</a>
+                        ))}
+                    </div>
+            )}
+        </div>
+
+        <Prose>
+            <Content />
+        </Prose>
+
     </div>
 </BaseLayout>
 
 <style>
 
-    .project-header, .content {
+    .project {
+        margin-top: var(--gap-medium);
+        margin-bottom: var(--gap-large);
+    }
+
+    .project-header {
         margin: var(--gap-tiny);
     }
 
+    .project-title-container {
+        display: flex;
+        align-items: flex-end;
+        gap: var(--gap-tiny);
+        margin-bottom: var(--gap-tiny);
+    }
+
+    .project-title {
+        margin: 0;
+    }
+
+    .date {
+        margin: 0;
+        color: var(--text-muted);
+    }
+
     img {
-        margin-top: var(--gap-small);
         width: 100%;
         height: auto;
         border-radius: 20px;
-        border-style: solid;
-        border-color: var(--primary);
-        border-width: 2px;
+        box-shadow: 0 0 5px black;
     }
 
     .project-header {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         margin-bottom: var(--gap-medium);
     }
 
     #project-title {
-        margin-bottom: var(--gap-tiny);
+        margin-bottom: 0;
     }
 
-    .tech-list, .link-list {
+    .tech-list,
+    .link-list {
         display: flex;
         align-items: end;
         gap: var(--gap-tiny);
+        margin-top: .5em;
+    }
+
+    @Media (max-width: 650px) {
+        .tech-list.tech-list {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 0;
+        }
     }
 
     .tech-list p, .link-list p {
-        margin: .5em 0 0 0;
+        margin: 0
     }
 
     .tech-item {
         color: var(--secondary);
-    }
-
-    #date {
-        margin: 0;
-        color: var(--text-muted);
     }
 
 </style>

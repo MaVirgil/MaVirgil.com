@@ -1,13 +1,14 @@
 ---
 import Header from "../components/Header.astro";
 const { title="default title" } = Astro.props;
-const { maxWidth="50em"} = Astro.props;
+const { maxWidth="33em"} = Astro.props;
+import ThemeSwitcher from "../components/ThemeSwitcher.astro"
 ---
 
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -15,16 +16,9 @@ const { maxWidth="50em"} = Astro.props;
     <script is:inline>
         const theme = (() => {
             if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                console.log('return theme from localStorage');
                 return localStorage.getItem('theme');
             }
 
-            if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-                console.log('prefers light: true -- returning "light"');
-                return 'light';
-            }
-
-            console.log('prefers light: false -- returning "dark"');
             return 'dark';
         })();
 
@@ -34,9 +28,9 @@ const { maxWidth="50em"} = Astro.props;
             document.documentElement.classList.remove('light');
         }
     </script>
-
 </head>
 <body>
+    <ThemeSwitcher />
 <main>
     <slot />
 </main>
@@ -44,56 +38,67 @@ const { maxWidth="50em"} = Astro.props;
 </html>
 
 <style is:global define:vars={{maxWidth}}>
-    @font-face {
-        font-family: 'Manrope';
-        src: url("/manrope.woff2") format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
     /* dark-mode colors */
     :root {
-        --bg-dark: oklch(0.19 0.005 71);
-        --bg-light: oklch(0.25 0.01 71);
+        --bg: oklch(0.19 0.005 71);
+        --bg-element: oklch(0.25 0.005 71);
         --text: oklch(0.96 0.07 69);
         --text-muted: oklch(0.76 0.07 69);
-        --highlight: oklch(0.5 0.07 69);
         --primary: oklch(0.681 0.1586 47.54);
-        --secondary: oklch(0.76 0.1 249);
-        --danger: oklch(0.35 0.1 30);
+        --secondary: oklch(0.70 0.07 250);
+        --danger: oklch(0.36 0.1 30);
         --rounding: 18px;
         --edge-padding: 2em;
         --gap-tiny: 0.4em;
         --gap-small: 2em;
         --gap-medium: 4em;
-        --gap-large: 6em
+        --gap-large: 6em;
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-dark);
+            background-color: var(--bg-element);
+            font-style: var(--shiki-dark-font-style);
+            font-weight: var(--shiki-dark-font-weight);
+            text-decoration: var(--shiki-dark-text-decoration);
+        }
+    }
+
+    .astro-code {
+        padding: 1.2em;
+        border-radius: var(--rounding);
     }
 
     /* light-mode colors */
     :root.light {
-        --bg-dark: oklch(.8 0.06 69);
-        --bg-light: oklch(0.96 0.035 69);
-        --text: oklch(0.25 0.0214 36.85);
+        --bg: oklch(.8 0.06 69);
+        --bg-element: oklch(.87 0.05 69);
+        --text: oklch(0.15 0.0412 36.85);
         --text-muted: oklch(0.4 0.07 69);
-        --highlight: oklch(1 0.07 69);
-        --border: oklch(0.6 0.07 69);
-        --border-muted: oklch(0.7 0.07 69);
         --primary: oklch(0.65 0.1586 47.54);
         --secondary: oklch(0.6 0.15 249);
-        --danger: oklch(0.75 0.2 30);
+        --danger: oklch(0.65 0.17 30);
+        .astro-code,
+        .astro-code span {
+            color: var(--shiki-light);
+            font-style: var(--shiki-light-font-style);
+            font-weight: var(--shiki-light-font-weight);
+            text-decoration: var(--shiki-light-text-decoration);
+        }
     }
 
     html,
     body {
+        scrollbar-gutter: stable both-edges;
         margin: 0;
         width: 100%;
         min-height: 100vh;
-        background-color: var(--bg-dark);
+        background-color: var(--bg);
         color: var(--text);
-        font-family: Manrope, sans-serif;
-        text-wrap: pretty;
-        line-height: 1.6em;
+        font-family: sans-serif;
+        font-size: 18px;
     }
 
     main {
@@ -108,12 +113,12 @@ const { maxWidth="50em"} = Astro.props;
     }
 
     a {
-        cursor: pointer;
         color: var(--text);
         text-decoration-color: var(--primary);
         text-decoration-thickness: 2px;
         text-decoration-skip-ink: none;
         text-underline-offset: 0.3em;
+        cursor: pointer;
     }
 
     a:hover {

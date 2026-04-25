@@ -1,26 +1,29 @@
 ---
 import { getCollection } from "astro:content";
-import { formatDate} from "../../scripts/utils";
+import {formatDateFull, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
 import { Image } from "astro:assets"
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 
 const projects = (await getCollection('projects')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    (a, b) => getLatestDateField(b) - getLatestDateField(a)
 ).filter(project => project.data.finished === true);
 ---
 
 <BaseLayout title="Projects">
-    <Header></Header>
+    <Header />
     <div class="projects-container">
-        <h1 id="projects-header">Projects:</h1>
+        {projects.length === 0 && (
+            <p>No Projects Found!</p>
+        )}
+
         {projects.map(project => (
             <a href={`/projects/${project.id}`} class="project-card-anchor-container">
                 <div class="project-card">
                     <Image src={project.data.cover} alt={project.data.coverAlt} />
                     <div class="project-data">
                         <h3 class="project-title">{project.data.title}</h3>
-                        <p class="date">{formatDate(project.data.pubDate)}</p>
+                        <p class="date">{formatDateFull(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDateFull(project.data.updateDate)})`)}</p>
                         <p class="project-description">{project.data.description}</p>
                     </div>
                 </div>
@@ -35,29 +38,28 @@ const projects = (await getCollection('projects')).sort(
     }
 
     .projects-container {
+        max-width: 40em;
         display: flex;
         flex-direction: column;
-        box-sizing: content-box;
-        align-items: center;
-        gap: var(--gap-medium);
-        margin: var(--gap-small) var(--edge-padding) 0;
+        gap: var(--gap-small);
+        margin: var(--gap-medium) auto;
     }
 
     .project-card-anchor-container {
         color: var(--text);
         text-decoration: none;
-        cursor: pointer;
     }
 
     .project-card {
+        overflow: hidden;
         max-width: 40em;
-        padding: 1.3em;
-        background-color: var(--bg-light);
+        padding: 0.8em 0.8em 0;
         border-radius: var(--rounding);
+        background-color: var(--bg-element);
+        box-shadow: 0 0 7px black;
     }
 
     .project-card:hover {
-        box-shadow-color: var(--primary);
         animation: anim 150ms 1 forwards;
     }
 
@@ -65,11 +67,10 @@ const projects = (await getCollection('projects')).sort(
         width: 100%;
         height: auto;
         border-radius: 20px;
-        border-style: solid var(--primary);
     }
 
     .project-data {
-        margin: 0.5em;
+        margin: 0.5em 0.5em 0;
     }
 
     .project-title {
@@ -87,13 +88,9 @@ const projects = (await getCollection('projects')).sort(
     }
 
     @keyframes anim {
-        0% {
-            transform: scale(1);
-            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
-        }
         100% {
-            transform: scale(1.02);
-            background: linear-gradient(0deg, var(--highlight) 0%, var(--bg-light) 100%);
+            transform: scale(1.01);
+            box-shadow: 0 0 15px black
         }
     }
 </style>
