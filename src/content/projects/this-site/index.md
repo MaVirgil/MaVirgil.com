@@ -12,7 +12,7 @@ technologies: [
 ]
 links: [
   {
-    url: "https://github.com",
+    url: "https://github.com/MaVirgil/MaVirgil.com",
     name: "Github"
   }
 ]
