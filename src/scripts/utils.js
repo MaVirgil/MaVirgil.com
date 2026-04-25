@@ -1,7 +1,11 @@
 //Date utils
 
-export function formatDate(date) {
-    return new Date(date).toLocaleDateString('en-GB')
+export function formatDateFull(date) {
+    return new Date(date).toLocaleDateString('en-GB');
+}
+
+export function formatDateYear(date) {
+    return new Date(date).getFullYear().toString();
 }
 
 export function getLatestDateField(project) {

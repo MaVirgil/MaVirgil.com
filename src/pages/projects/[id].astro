@@ -16,18 +16,18 @@ const { Content } = await render(project)
 
 //other imports
 import { Image } from "astro:assets"
-import {formatDate, hasUpdateDate} from "../../scripts/utils";
+import {formatDateFull, formatDateYear, hasUpdateDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
 import Prose from "../../components/Prose.astro";
 ---
 
-<BaseLayout title={`Project — ${project.data.title}`} maxWidth="40em">
+<BaseLayout title={`Project — ${project.data.title}`} maxWidth="45em">
 
     <Header />
 
-    <div id="project">
+    <div class="project">
 
         {project.data.finished === false && (
             <Alert message="You've found a hidden post! It's probably not done yet, so you'd better get out of here!"/>
@@ -36,12 +36,16 @@ import Prose from "../../components/Prose.astro";
         <Image src={project.data.cover} alt={project.data.coverAlt}/>
 
         <div class="project-header">
-            <h1 id="project-title">{project.data.title}</h1>
-            <p id="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
+
+            <div class="project-title-container">
+                <h1 class="project-title">{project.data.title}</h1>
+            </div>
+
+            <p class="date">{formatDateFull(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDateFull(project.data.updateDate)})`)}</p>
 
             {typeof project.data.technologies !== "undefined" && (
                     <div class="tech-list">
-                        <p>Technologies used: </p>
+                        <p>Technologies: </p>
                         {project.data.technologies.map(technology => (
                                 <p class="tech-item">{technology}</p>
                         ))}
@@ -66,13 +70,30 @@ import Prose from "../../components/Prose.astro";
 </BaseLayout>
 
 <style>
-    .project-header, .content {
+
+    .project {
+        margin-top: var(--gap-medium);
+        margin-bottom: var(--gap-large);
+    }
+
+    .project-header {
         margin: var(--gap-tiny);
     }
 
-    #project {
-        margin-top: var(--gap-medium);
-        margin-bottom: var(--gap-large);
+    .project-title-container {
+        display: flex;
+        align-items: flex-end;
+        gap: var(--gap-tiny);
+        margin-bottom: var(--gap-tiny);
+    }
+
+    .project-title {
+        margin: 0;
+    }
+
+    .date {
+        margin: 0;
+        color: var(--text-muted);
     }
 
     img {
@@ -116,11 +137,6 @@ import Prose from "../../components/Prose.astro";
 
     .tech-item {
         color: var(--secondary);
-    }
-
-    #date {
-        margin: 0 0 var(--gap-tiny);
-        color: var(--text-muted);
     }
 
 </style>

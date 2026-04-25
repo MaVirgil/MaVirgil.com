@@ -16,21 +16,21 @@ const { Content } = await render(post)
 
 //other imports
 import { Image } from "astro:assets"
-import {formatDate, hasUpdateDate} from "../../scripts/utils";
+import {formatDateFull, hasUpdateDate} from "../../scripts/utils";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Alert from "../../components/Alert.astro";
 import Prose from "../../components/Prose.astro";
 ---
 
-<BaseLayout title={`Post — ${post.data.title}`} maxWidth="40em">
+<BaseLayout title={`Post — ${post.data.title}`} maxWidth="45em">
 
     <Header />
     <div class="post">
 
         <div class="post-header">
             <h1 class="post-title">{post.data.title}</h1>
-            <p class="date">{formatDate(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDate(post.data.updateDate)})`)}</p>
+            <p class="date">{formatDateFull(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDateFull(post.data.updateDate)})`)}</p>
             <p class="post-description">{post.data.description}</p>
         </div>
 

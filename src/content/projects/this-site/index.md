@@ -1,7 +1,8 @@
 ---
-title: Blog/Portfolio with Astro & Coolify
-description: My personal portfolio/blog site and how I host it
+title: Portfolio/Blog
+description: My personal portfolio/blog site
 pubDate: 2026-02-01
+updateDate: 2026-02-22
 cover: './cover.png'
 coverAlt: "A screenshot of my personal blog/portfolio"
 technologies: [
@@ -51,18 +52,6 @@ the project's scope, and I ultimately felt like I was using a bulldozer to pick 
 Instead, I decided that this was my chance to get some experience with self-hosting; that way, I could have full control over what was happening on the server, 
 and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
 for a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
-
-```js
-const newFunction = (message) => {
-    return () => {
-        console.log(message);
-    }
-}
-
-const sayHello = newFunction('hello!');
-
-sayHello();
-```
 
 ## The Tech
 

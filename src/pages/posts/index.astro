@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import {formatDate, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
+import {formatDateFull, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 
@@ -20,7 +20,7 @@ const posts = (await getCollection('posts')).sort(
             <a href={`/posts/${post.id}`} class="post-anchor-container">
                 <div class="post-container">
                     <h3 class="post-title">{post.data.title}</h3>
-                    <p class="date">{formatDate(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDate(post.data.updateDate)})`)}</p>
+                    <p class="date">{formatDateFull(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDateFull(post.data.updateDate)})`)}</p>
                     <p class="post-description">{post.data.description}</p>
                     <hr>
                 </div>

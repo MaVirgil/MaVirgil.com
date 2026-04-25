@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import {formatDate, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
+import {formatDateFull, getLatestDateField, hasUpdateDate} from "../../scripts/utils";
 import { Image } from "astro:assets"
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
@@ -23,7 +23,7 @@ const projects = (await getCollection('projects')).sort(
                     <Image src={project.data.cover} alt={project.data.coverAlt} />
                     <div class="project-data">
                         <h3 class="project-title">{project.data.title}</h3>
-                        <p class="date">{formatDate(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDate(project.data.updateDate)})`)}</p>
+                        <p class="date">{formatDateFull(project.data.pubDate)} {hasUpdateDate(project) && (`(Updated: ${formatDateFull(project.data.updateDate)})`)}</p>
                         <p class="project-description">{project.data.description}</p>
                     </div>
                 </div>
