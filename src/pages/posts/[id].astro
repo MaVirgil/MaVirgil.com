@@ -1,0 +1,70 @@
+---
+import { getCollection, render } from "astro:content";
+
+//Generate path for every project in collection 'projects' @ src/content/projects
+export async function getStaticPaths() {
+    const posts = await getCollection('posts');
+    return posts.map(post => ({
+        params: {id: post.id},
+        props: { post },
+    }));
+}
+
+//get content for rendering site
+const { post } = Astro.props;
+const { Content } = await render(post)
+
+//other imports
+import { Image } from "astro:assets"
+import {formatDateFull, hasUpdateDate} from "../../scripts/utils";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Alert from "../../components/Alert.astro";
+import Prose from "../../components/Prose.astro";
+---
+
+<BaseLayout title={`Post — ${post.data.title}`} maxWidth="45em">
+
+    <Header />
+    <div class="post">
+
+        <div class="post-header">
+            <h1 class="post-title">{post.data.title}</h1>
+            <p class="date">{formatDateFull(post.data.pubDate)} {hasUpdateDate(post) && (`(Updated: ${formatDateFull(post.data.updateDate)})`)}</p>
+            <p class="post-description">{post.data.description}</p>
+        </div>
+
+        <Prose>
+            <Content />
+        </Prose>
+
+    </div>
+</BaseLayout>
+
+<style>
+
+    .post {
+        margin-top: var(--gap-medium);
+        margin-bottom: var(--gap-large);
+    }
+
+    .post-header {
+        margin-bottom: var(--gap-medium);
+    }
+
+    .post-title {
+        margin: 0;
+    }
+
+    .date {
+        margin: 0 0 var(--gap-tiny);
+        color: var(--text-muted);
+    }
+
+    .post-description {
+        color: var(--text-muted);
+        font-style: italic;
+    }
+</style>
+
+

@@ -1,13 +1,12 @@
 ---
-title: Blog/Portfolio with Astro & Coolify
-description: My personal portfolio/blog site and how I host it
+title: Portfolio/Blog
+description: My personal portfolio/blog site
 pubDate: 2026-02-01
-updatedDate: 2026-02-02
+updateDate: 2026-02-22
 cover: './cover.png'
 coverAlt: "A screenshot of my personal blog/portfolio"
 technologies: [
   'JavaScript',
-  'Astro.JS',
   'HTML',
   'CSS',
 ]
@@ -48,12 +47,11 @@ to my CI/CD workflow using _GitHub Actions_ for automatic deployment was made tr
 main source of my later frustrations due to inconsistent navigation, confusing user-flow, and general unresponsiveness.
 
 While I understand the utility of hyperscalers like Azure or AWS for enterprise applications, and I valued the learning experience, the complexity felt disproportionate to 
-the project's scope, and I ultimately fel like I was using a bulldozer to pick up a dime.
+the project's scope, and I ultimately felt like I was using a bulldozer to pick up a dime.
 
 Instead, I decided that this was my chance to get some experience with self-hosting; that way, I could have full control over what was happening on the server, 
 and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
 for a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
-
 
 ## The Tech
 

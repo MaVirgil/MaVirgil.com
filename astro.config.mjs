@@ -11,6 +11,13 @@ export default defineConfig({
   output: "static",
   prefetch: true,
   markdown: {
+    shikiConfig: {
+      themes: {
+        dark: "github-dark",
+        light: "github-light",
+      },
+      defaultColor: false,
+    },
     rehypePlugins: [
         [
           rehypeExternalLinks,
