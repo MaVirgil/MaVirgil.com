@@ -124,9 +124,13 @@ fun to do with it in the future.
 ## The end result
 Moving away from the comfortable and type-safe world of Java felt exciting, albeit a little daunting.
 I did occasionally have to take a step back and resist the slightly amateurish temptation of adding flashy but unnecessary components just for their own sake.
-Still, I ended up with a solution that I am very satisfied with, one that meets just about all the criteria I had set for myself and that was genuinely fun and interesting to work on.
+Still, I ended up with a solution that I am very satisfied with, and which is just about as fast and responsive as I had hoped.
 
-That being said, I do expect to continue working on this site through small, incremental improvements,
+![lighthouse_scores.png](assets/lighthouse_scores.png)
+
+...and it was fun to work on, which is also nice.
+
+I do expect to continue working on this site through small, incremental improvements,
 and there are still aspects of it that I am less happy with: the styling of these posts, for example, still leaves something to be desired.
 
 
