@@ -1,8 +1,8 @@
 ---
 title: Portfolio/Blog
 description: My personal portfolio/blog site
-pubDate: 2026-02-01
-updateDate: 2026-02-22
+pubDate: 2026-04-22
+updateDate: 2026-04-28
 cover: './cover.png'
 coverAlt: "A screenshot of my personal blog/portfolio"
 technologies: [
@@ -13,65 +13,120 @@ technologies: [
 links: [
   {
     url: "https://github.com/MaVirgil/MaVirgil.com",
-    name: "Github"
+    name: "GitHub"
   }
 ]
 finished: true
 ---
 
-## The Goal
-I had a couple of different goals in mind when I started planning this project, the most important being that
-I actually felt it was something I needed. So many times when building stuff (especially through my studies), I've been 
-in a situation where I recognized the learning potential of a project and enjoyed building it, but where the product itself was... well, _useless_,
-so I was very excited to jump on the opportunity to work on something that felt _real_, and like I would actually
-be using it two months from now.
+## The goal
+I had a couple of different goals in mind when I started planning this project, the most important being that it solved a real need for me.
 
-At this point I had decided that I wanted a website that could:
+
+Most of my previous small-scale projects, especially those made through my studies, have primarily been useful to me as learning experiences.
+I mostly enjoyed building them, and naturally I appreciated their educational value, but the final product itself was always, well... _useless_.
+Because of this, I was very excited to jump at the opportunity to work on something that felt _real_, and that would actually provide some tangible value for me after it was finished.
+
+That being said, the project also naturally offered a valuable learning experience, as this would be my first real project using JavaScript.
+Prior to this, I had almost exclusively been using Java. My experience with JS was limited to a few simple scripts on otherwise static HTML pages, and I had never really sat down to learn the fundamentals
+from the bottom up.
+
+At the same time, I knew that this being my first project using JavaScript as the primary language carried with it some risk.
+It would have been easy to end up with a messy and slow solution, bogging down the client with cluttered code, resulting in poor performance and long load times. 
+Instead, I wanted to focus on keeping the site as lightweight as possible. I am _sure_ that it's possible to build a blazingly fast solution with a framework like React,
+but I am equally sure that my first experience with those technologies would not result in one.
+
+Simple & responsive beats flashy & janky.
+
+At that point, I had decided that I wanted a website that could:
 
  - Display my portfolio of finished projects and work
  - Act as a digital business card of sorts, with contact details and a summary of my profile
- - Give me a place to write about interesting stuff I learn while working on projects, that isn't necessarily a project in itself
+ - Give me a place to write about things I am interested in, even when they are not projects in themselves
 
-In addition to these more functional requirements, I also had some technical concerns regarding performance, hosting, and especially my
-workflow for writing and pushing posts. As this was to be a continuously updated site, I not only had to consider the developer experience of actually building it,
-but also the future workflow of updating it with posts and projects. Here the goal was to be able to push new posts to the site without having to touch code,
-and _especially_ not individual HTML files.
+In addition to these functional requirements, I also had some technical concerns regarding the workflow for writing and publishing posts.
+The site needed to support continuous updates with new projects and posts, and while the publishing cadence would not be
+high enough to justify using a CMS, I still needed a solution that made it fast and easy to publish new content, preferably without having to touch any code.
 
-I also knew that I wanted the site to be as lightweight as possible, and while I'm _sure_ that it's possible to create a blazingly fast and modern SPA with React, I'm also _sure_ that my
-very first experience with those technologies would be anything but that. As such, I decided that for this project, simple & responsive was better than flashy & janky.
+## Astro
+Going into this project, I had already heard a lot of good things about the [Astro](https://astro.build/) framework, especially for sites like this,
+and the more I looked into it, the more it seemed to match what I needed.
 
+Using Astro as a static site generator to render pages at build time meant that a simple web server like [Nginx](https://nginx.org/) could quickly serve static pages to the client with no per-request rendering on either the client or the server.
+Its [Content Collections API](https://docs.astro.build/en/reference/modules/astro-content/), together with Zod, also allowed me to easily define collections like `project` and `post` using schemas, resulting in a type-safe workflow,
+which made the transition from Java to JavaScript much smoother.
 
-Going in, I already had some cursory experience with hosting an earlier project on Azure with a free _Azure for Students_ account. I found this to be
-— rather paradoxically — both a very seamless and automatic process, and an incredibly finicky and frustrating one; creating a resource and connecting it
-to my CI/CD workflow using _GitHub Actions_ for automatic deployment was made trivial by a very helpful user interface, however, that very same interface proved to be the 
-main source of my later frustrations due to inconsistent navigation, confusing user-flow, and general unresponsiveness.
+```javascript
+const projects = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/projects"}),
+    schema: ({ image }) => z.object({
+        title: z.string(),
+        description: z.string(),
+        pubDate: z.coerce.date(),
+        updateDate: z.coerce.date().optional(),
+        ignoreUpdateDate: z.boolean().optional(),
+        cover: image(),
+        coverAlt: z.string(),
+        technologies: z.array(z.string()).optional(),
+        links: z.array(z.object({
+            url: z.string(),
+            name: z.string(),
+        })).optional(),
+        finished: z.boolean(),
+    })
+});
+```
 
-While I understand the utility of hyperscalers like Azure or AWS for enterprise applications, and I valued the learning experience, the complexity felt disproportionate to 
-the project's scope, and I ultimately felt like I was using a bulldozer to pick up a dime.
+Defining these collections also meant that I could write posts in the form of simple Markdown files,
+while storing their metadata in the frontmatter.
 
-Instead, I decided that this was my chance to get some experience with self-hosting; that way, I could have full control over what was happening on the server, 
-and I would not depend (directly, at least) on big tech companies. Setting up my own VPS proved a great learning experience, and the savings were surprisingly substantial: 
-for a setup like the server I ended up renting from [Hetzner](https://www.hetzner.com) (4vCPU | 8GB ram) I would have to pay up to [10x the amount](https://cloudcompare.xyz) on a provider like Digital Ocean.
+```markdown
+---
+title: Portfolio/Blog
+description: My personal portfolio/blog site
+pubDate: 2026-02-01
+updateDate: 2026-03-22
+cover: './cover.png'
+coverAlt: "A screenshot of my personal blog/portfolio"
+technologies: [
+  'JavaScript',
+  'HTML',
+  'CSS',
+]
+links: [
+  {
+    url: "https://github.com/MaVirgil/MaVirgil.com",
+    name: "GitHub"
+  }
+]
+finished: true
+---
+```
 
-## The Tech
+Even with little to no JavaScript experience, getting started using Astro was fairly seamless, thanks in part to their excellent [documentation](https://docs.astro.build/en/getting-started/).
+I found myself spending minimal time getting bogged down by unfamiliar syntax or unknown patterns,
+and for a project this small, the time it took until I was making key decisions about layout, design, and content was just about perfect.
 
-### Astro
-As luck would have it, the [Astro.JS](https://astro.build/) framework does pretty much exactly what I needed for this project, generating static pages with no JavaScript
-shipped to the client out of the box (I use it minimally in this project). It also features a type-safe content management API, allowing me to easily define collections
-like `project` and `post`, and publish new entries as simple `.md` files.
+## An aside about hosting
+Going in, I already had some cursory experience with hosting earlier projects on Azure through a free student account, with mixed results. I found the process overly complicated, and the UX rather messy.
+While I understand the utility of hyperscalers like Azure or AWS for enterprise applications, and I valued the learning experience, the complexity felt disproportionate to
+the project's scope, and it ultimately left me feeling like I was using a bulldozer to pick up a penny.
 
-Even as someone with little JavaScript experience, getting started using Astro was a pretty seamless experience
-(it doesn't hurt that they have amazing [docs](https://docs.astro.build/en/getting-started/) as well), and I found myself up and running very quickly, spending minimal time
-getting bogged down by unfamiliar syntax or new patterns. For a project like this, the time it took until I was making key decisions about layout, design, and content was
-just about perfect, although I did periodocially have to take a step back, and stop myself from implementing needless, flashy components just for the sake of it.
+Instead, I decided to use the project as an opportunity to gain some experience with hosting, server administration, and some networking fundamentals.
+That way, I could have full control over what was happening on the server and avoid relying directly on big tech companies, which I have admittedly grown a little weary of in recent years.
 
-### Infrastructure
-Instead of using managed hosting (Vercel/Netlify), I rented a VPS from Hetzner and set it up with Ubuntu, with the plan to use Docker to run all my different services in isolated
-containers. Setting up the firewall rules, and generating SSH keys turned out to be fairly straight-forward, even with my limited knowledge of both linux and networking
+I ended up renting a VPS, which turned out to be a good learning experience, and the savings were surprisingly substantial:
+for a server like the one I rented from [Hetzner](https://www.hetzner.com) (4 vCPUs | 8 GB RAM) the price I ended up paying was significantly lower than on providers like [DigitalOcean](https://www.digitalocean.com/).
 
-### CI/CD & Coolify
-To manage deployments, I installed [Coolify](https://coolify.io), an open-source, self-hosted Heroku alternative. Using a GitHub webhook I was able to set up a barebones CD workflow
-with near instant deployment on a push to the production branch of my GitHub repository. All in all I continue to be very impressed with Coolify, bringing the experience of deploying
-and managing my projects up to par (for the most part) with many small-to-medium scale PaaS providers, and it is definitely a tool I plan to continue using for the foreseeable future.
+This also left me with a fairly capable server, certainly one that can do more than host a simple static site, which gives me a great excuse to find something
+fun to do with it in the future.
+
+## The end result
+Moving away from the comfortable and type-safe world of Java felt exciting, albeit a little daunting.
+I did occasionally have to take a step back and resist the slightly amateurish temptation of adding flashy but unnecessary components just for their own sake.
+Still, I ended up with a solution that I am very satisfied with, one that meets just about all the criteria I had set for myself and that was genuinely fun and interesting to work on.
+
+That being said, I do expect to continue working on this site through small, incremental improvements,
+and there are still aspects of it that I am less happy with: the styling of these posts, for example, still leaves something to be desired.
 
 
