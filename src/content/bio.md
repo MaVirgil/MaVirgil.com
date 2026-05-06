@@ -1,6 +1,6 @@
 My name is _Magnus Sørensen_. <br>
 
-I am a Computer Science student from Copenhagen, Denmark.<br>
+I am a Software Development student from Copenhagen, Denmark.<br>
 
 Welcome to my website. <br>
 
