@@ -10,11 +10,11 @@ technologies: [
 ]
 links: [
   {
-    url: "https://github.com/MaVirgil/MaVirgil.com",
+    url: "https://github.com/GruppeTre/q-recycle-frontend",
     name: "GitHub"
   }
 ]
-finished: false
+finished: true
 ---
 
 This group project was made as part of the third semester of my studies, and involved working with an actual customer to develop a proof-of-concept solution to their specifications. In our case we found a small non-profit organization that collects used bottles and cans from participating restaurants, and utilizes the bottle deposit system to raise money for a variety of charity projects.
