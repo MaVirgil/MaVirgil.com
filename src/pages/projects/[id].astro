@@ -139,6 +139,10 @@ import Prose from "../../components/Prose.astro";
         color: var(--secondary);
     }
 
+    .tech-item:not(:last-child)::after {
+        content: ",";
+    }
+
 </style>
 
 
