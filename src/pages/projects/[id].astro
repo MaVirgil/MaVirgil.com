@@ -107,7 +107,7 @@ import Prose from "../../components/Prose.astro";
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin-bottom: var(--gap-medium);
+        margin-bottom: var(--gap-small);
     }
 
     #project-title {
@@ -137,6 +137,10 @@ import Prose from "../../components/Prose.astro";
 
     .tech-item {
         color: var(--secondary);
+    }
+
+    .tech-item:not(:last-child)::after {
+        content: ",";
     }
 
 </style>
