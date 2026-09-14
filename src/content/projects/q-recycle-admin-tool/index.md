@@ -3,7 +3,7 @@ title: Q-recycle Admin Tool
 description: An internal administrative tool for a non-profit organization
 pubDate: 2026-09-14
 cover: './cover.png'
-coverAlt: "A screenshot of the administrative dashboard"
+coverAlt: "Thumbnail showing various screenshots from the project"
 technologies: [
   'React',
   'Supabase'
